@@ -1,0 +1,37 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  box-shadow: 0 0 12px rgba(184, 126, 238, 0.8), 0 0 24px rgba(184, 126, 238, 0.4);
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  transition:
+    width 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.22s ease,
+    box-shadow 0.22s ease,
+    opacity 0.3s ease;
+  will-change: transform;
+}
+
+.cursor--visible {
+  opacity: 1;
+}
+
+.cursor--hover {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1.5px solid rgba(184, 126, 238, 0.7);
+  box-shadow: 0 0 16px rgba(184, 126, 238, 0.3);
+}
+
+/* Hide default cursor everywhere */
+*, *::before, *::after {
+  cursor: none !important;
+}
