@@ -7,6 +7,10 @@ export const dynamic = "force-static";
 export const metadata = pageMetadata(
   "Portfolio",
   "Case studies and client projects — web applications, data platforms, and engineering solutions by GSIX3.",
+  {
+    path: "/portfolio",
+    keywords: ["GSIX3 portfolio", "case studies", "client projects", "engineering work"],
+  },
 );
 
 export default function PortfolioPage() {

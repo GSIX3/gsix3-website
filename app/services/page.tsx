@@ -8,6 +8,18 @@ export const dynamic = "force-static";
 export const metadata = pageMetadata(
   "Services",
   "Web applications, AI, data science, database, cloud, and mobile development — GSIX3 engineering services.",
+  {
+    path: "/services",
+    keywords: [
+      "engineering services",
+      "web application development",
+      "AI development",
+      "data science consulting",
+      "cloud engineering",
+      "mobile app development",
+      "GSIX3 services",
+    ],
+  },
 );
 
 export default function ServicesPage() {

@@ -6,6 +6,10 @@ export const dynamic = "force-static";
 export const metadata = pageMetadata(
   "Contact",
   "Get in touch with GSIX3 for web development, AI, data science, cloud, or mobile projects.",
+  {
+    path: "/contact",
+    keywords: ["contact GSIX3", "software project inquiry", "engineering consultation"],
+  },
 );
 
 export default function ContactPage() {

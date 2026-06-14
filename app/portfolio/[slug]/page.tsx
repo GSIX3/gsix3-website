@@ -22,7 +22,12 @@ export async function generateMetadata({ params }: PageProps) {
   const project = getPortfolioProject(slug);
   if (!project) return {};
 
-  return pageMetadata(project.title, project.excerpt);
+  return pageMetadata(project.title, project.excerpt, {
+    path: `/portfolio/${slug}`,
+    keywords: project.tags,
+    ogImage: project.coverImage,
+    ogImageAlt: `${project.client} — ${project.title}`,
+  });
 }
 
 export default async function PortfolioCaseStudyPage({ params }: PageProps) {
