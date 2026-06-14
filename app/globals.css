@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #ffffff;
+  --color-bg-elevated: #f5f5f7;
+  --color-accent: #7a3f91;
+  --color-accent-bright: #9b5fd4;
+  --color-text: #0a0a0a;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+}
+
+:root {
+  --bg: #ffffff;
+  --bg-elevated: #f5f5f7;
+  --accent: #7a3f91;
+  --accent-bright: #9b5fd4;
+  --text: #0a0a0a;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --nav-height: 4rem;
+  --page-top: calc(var(--nav-height) + 2.5rem);
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: #ffffff;
+  color: #0a0a0a;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+main {
+  background-color: #ffffff;
+}
+
+::selection {
+  background: color-mix(in srgb, #7a3f91 20%, transparent);
+  color: #0a0a0a;
+}
+
+@keyframes typewriter-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.typewriter-cursor {
+  animation: typewriter-blink 1s step-end infinite;
+}
+
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

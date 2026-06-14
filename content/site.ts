@@ -1,0 +1,16 @@
+export const site = {
+  name: "GSIX3",
+  tagline: "Innovation with power. Engineered with quality.",
+  description:
+    "GSIX3 partners with enterprises and startups to build web applications, AI, data science, cloud, and mobile solutions that drive real business outcomes.",
+  url: "https://www.gsix3.com",
+  email: "hello@gsix3.com",
+  established: "2025",
+  logoVersion: "2",
+  nav: [
+    { label: "Services", href: "/services" },
+    { label: "Portfolio", href: "/portfolio" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ],
+} as const;
