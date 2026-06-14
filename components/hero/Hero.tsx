@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useHydratedReducedMotion } from "@/hooks/useHydratedReducedMotion";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
 import Button from "@/components/ui/Button";
@@ -10,7 +11,7 @@ import TypewriterText from "@/components/motion/TypewriterText";
 import { EASE } from "@/lib/motion";
 
 export default function Hero() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useHydratedReducedMotion();
   const { hero } = homeContent;
 
   return (

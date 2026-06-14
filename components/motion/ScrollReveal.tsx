@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { type ReactNode } from "react";
+import { useHydratedReducedMotion } from "@/hooks/useHydratedReducedMotion";
 import { EASE } from "@/lib/motion";
 
 type ScrollRevealProps = {
@@ -15,7 +16,7 @@ export default function ScrollReveal({
   className = "",
   delay = 0,
 }: ScrollRevealProps) {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useHydratedReducedMotion();
 
   if (reducedMotion) {
     return <div className={className}>{children}</div>;

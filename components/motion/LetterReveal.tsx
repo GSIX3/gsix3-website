@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useHydratedReducedMotion } from "@/hooks/useHydratedReducedMotion";
 import { EASE } from "@/lib/motion";
 
 type LetterRevealProps = {
@@ -16,7 +17,7 @@ export default function LetterReveal({
   as: Tag = "span",
   delay = 0,
 }: LetterRevealProps) {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useHydratedReducedMotion();
   const letters = text.split("");
 
   if (reducedMotion) {

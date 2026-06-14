@@ -39,6 +39,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full bg-white text-zinc-900`}
+      suppressHydrationWarning
     >
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -48,7 +49,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full bg-white text-zinc-900 antialiased">
+      <body
+        className="min-h-full bg-white text-zinc-900 antialiased"
+        suppressHydrationWarning
+      >
         <GrainOverlay />
         <Navbar />
         <main className="flex-1">{children}</main>

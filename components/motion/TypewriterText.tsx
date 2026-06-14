@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
+import { useHydratedReducedMotion } from "@/hooks/useHydratedReducedMotion";
 
 type TypewriterTextProps = {
   text: string;
@@ -16,10 +16,10 @@ export default function TypewriterText({
   className = "",
   onComplete,
 }: TypewriterTextProps) {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useHydratedReducedMotion();
   const onCompleteRef = useRef(onComplete);
-  const [displayed, setDisplayed] = useState(reducedMotion ? text : "");
-  const [done, setDone] = useState(!!reducedMotion);
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
