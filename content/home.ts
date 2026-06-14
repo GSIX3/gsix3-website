@@ -35,6 +35,10 @@ export const homeContent = {
     title: "Who We Work With",
     items: [
       {
+        name: "Bowatta Beheth Shalawa",
+        logo: "/bowatte-logo.webp",
+      },
+      {
         name: "VIDA Edgewater",
         logo: "/urbana_bueno.png",
       },

@@ -6,6 +6,7 @@ export type PortfolioProject = {
   title: string;
   excerpt: string;
   coverImage: string;
+  coverImageFit?: "cover" | "contain";
   about: string;
   objectives: string[];
   solution: string;
@@ -13,6 +14,29 @@ export type PortfolioProject = {
 };
 
 export const portfolioProjects: PortfolioProject[] = [
+  {
+    slug: "bowatta-beheth-shalawa",
+    client: "Bowatta Beheth Shalawa",
+    clientLabel: "Bowatta",
+    clientLogo: "/bowatte-logo.webp",
+    title:
+      "Fingerprint Attendance, Employee Management & Shop KPI Platform for Bowatta Beheth Shalawa",
+    excerpt:
+      "Our latest delivery — a shop operations platform with biometric fingerprint check-in, employee management, and automated KPI tracking to help Bowatta Beheth Shalawa run their retail team with clarity and control.",
+    coverImage: "/bowatta_fingerprint.gif",
+    coverImageFit: "contain",
+    about:
+      "Bowatta Beheth Shalawa is a retail shop that needed a modern way to manage staff attendance, roles, and daily performance without manual spreadsheets or guesswork. GSIX3 partnered with them to build an integrated operations platform tailored to how their shop runs day to day — from fingerprint-based clock-in at the counter to manager dashboards that surface the KPIs that matter most.",
+    objectives: [
+      "Implement a reliable fingerprint system for secure staff check-in and attendance tracking at the shop.",
+      "Build employee management workflows for profiles, roles, schedules, and day-to-day staff administration.",
+      "Automate KPI calculations tied to shop activity so owners and managers can monitor performance in real time.",
+      "Deliver an intuitive interface that staff can use quickly during busy shop hours with minimal training.",
+    ],
+    solution:
+      "We designed and shipped a unified web platform that connects biometric fingerprint authentication with employee records and performance analytics. Staff clock in through the fingerprint module, while managers maintain employee data, monitor attendance, and review KPI dashboards from a single admin experience. KPI logic is calculated from shop operations data so leadership can track trends, compare periods, and act on insights without exporting to external tools. The result is a practical, shop-ready system that replaces fragmented manual processes with one dependable source of truth.",
+    tags: ["Web App", "Fingerprint", "Employee Management", "KPI Analytics", "Retail"],
+  },
   {
     slug: "vida-edgewater",
     client: "VIDA Edgewater",
@@ -62,4 +86,8 @@ export const portfolioProjects: PortfolioProject[] = [
 
 export function getPortfolioProject(slug: string): PortfolioProject | undefined {
   return portfolioProjects.find((project) => project.slug === slug);
+}
+
+export function getLatestPortfolioProject(): PortfolioProject {
+  return portfolioProjects[0]!;
 }

@@ -8,6 +8,8 @@ type PortfolioCardProps = {
 };
 
 export default function PortfolioCard({ project, isLast = false }: PortfolioCardProps) {
+  const coverFit = project.coverImageFit ?? "cover";
+
   return (
     <article
       className={
@@ -25,7 +27,7 @@ export default function PortfolioCard({ project, isLast = false }: PortfolioCard
             src={project.coverImage}
             alt={project.client}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            className={`${coverFit === "contain" ? "object-contain bg-zinc-950 p-2" : "object-cover"} transition-transform duration-700 group-hover:scale-[1.02]`}
             sizes="(max-width: 768px) 100vw, 520px"
             unoptimized
           />

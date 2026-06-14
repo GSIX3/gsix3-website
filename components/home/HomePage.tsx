@@ -7,6 +7,10 @@ const Hero = dynamic(() => import("@/components/hero/Hero"), {
   loading: () => <div className="min-h-screen" />,
 });
 
+const LatestProject = dynamic(() => import("@/components/home/LatestProject"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+
 const ServiceShowcase = dynamic(
   () => import("@/components/services/ServiceShowcase"),
   { loading: () => <div className="min-h-[400px]" /> },
@@ -16,6 +20,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <LatestProject />
       <ServiceShowcase />
       <Testimonials />
       <WhoWeWorkWith />

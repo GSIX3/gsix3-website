@@ -36,6 +36,8 @@ export default async function PortfolioCaseStudyPage({ params }: PageProps) {
 
   if (!project) notFound();
 
+  const coverFit = project.coverImageFit ?? "cover";
+
   return (
     <article className="pt-20">
       <div className="relative aspect-[21/9] w-full overflow-hidden bg-bg-elevated md:aspect-[2.4/1]">
@@ -43,7 +45,7 @@ export default async function PortfolioCaseStudyPage({ params }: PageProps) {
           src={project.coverImage}
           alt={project.client}
           fill
-          className="object-cover"
+          className={coverFit === "contain" ? "object-contain bg-zinc-950 p-4" : "object-cover"}
           priority
           unoptimized
         />
@@ -123,7 +125,7 @@ export default async function PortfolioCaseStudyPage({ params }: PageProps) {
               src={project.coverImage}
               alt={`${project.client} platform`}
               fill
-              className="object-cover"
+              className={coverFit === "contain" ? "object-contain bg-zinc-950 p-4" : "object-cover"}
               unoptimized
             />
           </div>
