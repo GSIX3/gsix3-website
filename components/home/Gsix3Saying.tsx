@@ -29,12 +29,12 @@ const purpleTheme = {
 
 export default function Gsix3Saying() {
   return (
-    <section className="bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="bg-white py-8 sm:py-16 md:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <ScrollReveal>
-          <div className="flex min-h-80 items-center justify-center px-2 md:px-8">
-            <h2 className="font-heading group relative mx-auto max-w-4xl text-center text-4xl font-bold leading-tight tracking-tight text-balance text-slate-950 sm:text-5xl md:text-6xl xl:text-7xl">
-              <span className="block">
+          <div className="flex min-h-40 items-center justify-center px-0 sm:min-h-64 md:min-h-80 md:px-8">
+            <h2 className="font-heading group relative mx-auto w-full max-w-none text-center text-[clamp(1.35rem,5.9vw,1.65rem)] font-bold leading-[1.15] tracking-tight text-slate-950 sm:max-w-2xl sm:text-5xl md:max-w-4xl md:text-6xl md:leading-tight xl:text-7xl">
+              <span className="block whitespace-nowrap">
                 Innovation{" "}
                 <CanvasText
                   text="with power"
@@ -45,7 +45,7 @@ export default function Gsix3Saying() {
                 />
                 .
               </span>
-              <span className="mt-4 block">
+              <span className="mt-2 block whitespace-nowrap sm:mt-4">
                 <CanvasText
                   text="Engineered"
                   backgroundClassName={purpleTheme.backgroundClassName}

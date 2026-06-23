@@ -53,6 +53,7 @@ export default function WhyGsix3() {
           <h2 className="font-heading text-3xl font-medium leading-tight tracking-tight text-white md:text-5xl">
             <LayoutTextFlip
               text="WHY GSIX3"
+              className="flex-col sm:flex-row"
               words={[
                 "enterprise-grade",
                 "AI-native",
