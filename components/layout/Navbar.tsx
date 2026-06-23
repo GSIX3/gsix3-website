@@ -22,11 +22,21 @@ export default function Navbar() {
   const isHome = pathname === "/";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    // On the home page the hero is pinned while the logo travels into the
+    // header, so keep the bar fully transparent until that handoff is done
+    // (~the pin release point); elsewhere react as soon as the user scrolls.
+    const onScroll = () => {
+      const threshold = isHome ? window.innerHeight * 0.72 : 24;
+      setScrolled(window.scrollY > threshold);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isHome]);
 
   useEffect(() => {
     setOpen(false);
@@ -53,21 +63,28 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out ${
           open
             ? "border-transparent bg-transparent"
             : scrolled || !isHome
-              ? "border-b border-border bg-bg/90 backdrop-blur-xl"
-              : "bg-transparent"
+              ? "border-black/[0.06] bg-white/70 shadow-[0_8px_30px_-16px_rgba(15,15,25,0.25)] backdrop-blur-xl backdrop-saturate-150"
+              : "border-transparent bg-transparent"
         }`}
       >
         <div className="mx-auto flex min-h-[var(--nav-height)] max-w-6xl items-center justify-between px-6 py-3">
           <Link
             href="/"
-            className="relative z-[60] flex shrink-0 items-center"
+            className={`relative z-[60] flex shrink-0 items-center transition-opacity duration-200 ${
+              isHome && !open
+                ? "pointer-events-none opacity-0"
+                : "opacity-100"
+            }`}
             onClick={() => setOpen(false)}
+            aria-hidden={isHome && !open}
+            tabIndex={isHome && !open ? -1 : undefined}
           >
             <Image
+              id="site-header-logo-img"
               src={`/logo.png?v=${site.logoVersion}`}
               alt={site.name}
               width={120}
@@ -78,21 +95,33 @@ export default function Navbar() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-10 md:flex">
+          <nav className="hidden items-center gap-9 md:flex">
             {site.nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-[15px] transition-colors ${
+                className={`group relative text-[14px] font-medium tracking-tight transition-colors duration-200 ${
                   isActive(item.href)
-                    ? "font-medium text-text underline decoration-text underline-offset-10"
+                    ? "text-text"
                     : "text-text-muted hover:text-text"
                 }`}
               >
                 {item.label}
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute -bottom-1.5 left-0 h-px w-full origin-left rounded-full bg-accent transition-transform duration-300 ease-out ${
+                    isActive(item.href)
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
               </Link>
             ))}
-            <Button href="/contact" variant="primary" className="px-5 py-2 text-sm">
+            <Button
+              href="/contact"
+              variant="primary"
+              className="rounded-full px-5 py-2 text-sm shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
+            >
               Talk to us
             </Button>
           </nav>

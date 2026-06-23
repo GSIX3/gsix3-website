@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(ls lib/)",
+      "Bash(grep -rl \"clsx\\\\|tailwind-merge\\\\|export function cn\\\\|export const cn\" lib components)",
+      "Bash(curl -s -o /dev/null -w \"http:%{http_code}\\\\n\" http://localhost:3007)",
+      "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1; rm -f \"C:\\\\\\\\Users\\\\\\\\WW\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\gsix-lamp.png\" \"C:\\\\\\\\Users\\\\\\\\WW\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\gsix-lamp2.png\" 2>/dev/null; echo cleaned)",
+      "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1; rm -f \"C:\\\\\\\\Users\\\\\\\\WW\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\gsix-lamp\"*.png 2>/dev/null; echo cleaned)",
+      "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1; rm -f \"C:\\\\\\\\Users\\\\\\\\WW\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\gsix-c\"*.png 2>/dev/null; echo cleaned)",
+      "Read(//c/Users/WW/Downloads/**)",
+      "Bash(ls public/)",
+      "Bash(ls public/assets/)",
+      "Bash(ls assets/)",
+      "Bash(node -e ' *)",
+      "Bash(mv -f \"public/assets/_tmp_logo.png\" \"public/assets/gsix3-logo-white.png\")",
+      "Bash(node -e \"const b=require\\('fs'\\).readFileSync\\('public/assets/gsix3-logo-white.png'\\);console.log\\('final',b.readUInt32BE\\(16\\)+'x'+b.readUInt32BE\\(20\\)\\);\")",
+      "Bash(rm -f /c/Users/WW/AppData/Local/Temp/rsp-*.png /c/Users/WW/AppData/Local/Temp/r2-*.png /c/Users/WW/AppData/Local/Temp/r3-*.png /c/Users/WW/AppData/Local/Temp/r4-*.png /c/Users/WW/AppData/Local/Temp/em-*.png /tmp/measure.mjs /tmp/emul.mjs /tmp/emul2.mjs)",
+      "Bash(rm -rf /c/Users/WW/AppData/Local/Temp/edge-prof-*)",
+      "Bash(cd \"c:/New folder/website/gsix3-website\" && npx tsc --noEmit 2>&1 | head -10; echo \"tsc-done\" *)",
+      "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1; rm -f /c/Users/WW/AppData/Local/Temp/gap-1440.png /tmp/emul4.mjs 2>/dev/null; echo cleaned)",
+      "Bash(ls -la *.png *.svg)",
+      "Bash(ls -la assets/)",
+      "Bash(node -e \"try{require.resolve\\('playwright'\\);console.log\\('playwright-core present'\\)}catch\\(e\\){console.log\\('no playwright'\\)}\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\WW\\AppData\\Local\\Temp",
+      "\\tmp"
+    ]
+  }
+}

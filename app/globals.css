@@ -66,6 +66,37 @@ main {
   animation: typewriter-blink 1s step-end infinite;
 }
 
+.hero-gradient-panel {
+  background-image: linear-gradient(
+    130deg,
+    #7a3f91 0%,
+    #b054de 22%,
+    #ed40b3 42%,
+    #9b5fd4 64%,
+    #6ef7cc 100%
+  );
+  background-size: 280% 280%;
+  animation: hero-gradient-pan 16s ease-in-out infinite;
+}
+
+@keyframes hero-gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-gradient-panel {
+    animation: none;
+  }
+}
+
 .grain-overlay {
   pointer-events: none;
   position: fixed;

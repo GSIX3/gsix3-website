@@ -1,4 +1,4 @@
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Jost, Space_Grotesk } from "next/font/google";
 import Footer from "@/components/layout/Footer";
 import GrainOverlay from "@/components/layout/GrainOverlay";
 import Navbar from "@/components/layout/Navbar";
@@ -14,6 +14,12 @@ const inter = Inter({
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
   display: "swap",
 });
@@ -38,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full bg-white text-zinc-900`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jost.variable} h-full bg-white text-zinc-900`}
       suppressHydrationWarning
     >
       <head>
