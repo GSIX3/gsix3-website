@@ -277,7 +277,7 @@ export default function Hero() {
   );
 
   const heroStage = (
-    <div className="relative flex min-h-dvh w-full items-center bg-white">
+    <div className="relative flex min-h-svh w-full items-center bg-white">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 py-28 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-24 xl:gap-28 2xl:gap-36 2xl:px-12">
         {/* Left: logo + content */}
         <div className="flex flex-col items-center lg:items-start">
@@ -303,8 +303,8 @@ export default function Hero() {
   }
 
   return (
-    <section ref={sectionRef} className="relative h-[170vh]">
-      <div className="sticky top-0 h-dvh overflow-hidden">
+    <section ref={sectionRef} className="relative h-[170svh]">
+      <div className="sticky top-0 h-svh overflow-hidden">
         {heroStage}
       </div>
 
