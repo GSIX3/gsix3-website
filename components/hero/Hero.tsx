@@ -213,7 +213,7 @@ export default function Hero() {
         <span className="sr-only">{hero.headline}</span>
         <span aria-hidden="true">
           {headlineLines.map((line, index) => (
-            <span className="block" key={line}>
+            <span className="block whitespace-nowrap" key={line}>
               <EncryptedText
                 text={line}
                 encryptedClassName="text-purple-300/60"
@@ -278,7 +278,7 @@ export default function Hero() {
 
   const heroStage = (
     <div className="relative flex min-h-svh w-full items-center bg-white">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 py-28 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-24 xl:gap-28 2xl:gap-36 2xl:px-12">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 pt-14 pb-32 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-24 xl:gap-28 2xl:gap-36 2xl:px-12">
         {/* Left: logo + content */}
         <div className="flex flex-col items-center lg:items-start">
           <div className="mb-7 md:mb-9">{lampLogo}</div>
