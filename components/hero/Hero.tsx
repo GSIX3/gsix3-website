@@ -91,15 +91,22 @@ export default function Hero() {
 
   // The portion of the pinned scroll over which the logo finishes its journey.
   const completeAtRef = useRef(1);
+  // Dead-zone at the top (mobile) so the logo "stays" before it starts moving.
+  const startOffsetRef = useRef(0);
+  // Last viewport width — used to ignore mobile URL-bar (height-only) resizes.
+  const lastWidthRef = useRef(0);
+  // Target progress (from scroll) vs. rendered progress (eased toward target).
+  const targetPRef = useRef(0);
+  const currentPRef = useRef(0);
+  const loopingRef = useRef(false);
 
-  const applyProgress = useCallback(() => {
+  // Paint the morph logo for a given progress 0..1.
+  const renderTransform = useCallback((p: number) => {
     const anchors = anchorsRef.current;
     const morph = morphRef.current;
     if (!anchors || !morph) return;
 
-    const p = clamp(window.scrollY / completeAtRef.current, 0, 1);
     const { start, end } = anchors;
-
     const cx = lerp(start.cx, end.cx, p);
     const cy = lerp(start.cy, end.cy, p);
     const scale = lerp(1, end.h / start.h, p);
@@ -107,7 +114,15 @@ export default function Hero() {
     morph.style.transform = `translate(calc(${cx}px - 50%), calc(${cy}px - 50%)) scale(${scale})`;
   }, []);
 
-  // Recompute anchors on mount / resize / breakpoint change.
+  // Map the current scroll position to a target progress, with a top dead-zone.
+  const computeTargetP = useCallback(() => {
+    const denom = Math.max(1, completeAtRef.current - startOffsetRef.current);
+    return clamp((window.scrollY - startOffsetRef.current) / denom, 0, 1);
+  }, []);
+
+  // Recompute anchors on mount / orientation / breakpoint change. Crucially,
+  // we skip height-only resizes (the mobile URL bar showing/hiding) which would
+  // otherwise re-anchor the logo mid-scroll and make it jump.
   useLayoutEffect(() => {
     if (isMobile === null || reducedMotion) return;
 
@@ -115,9 +130,22 @@ export default function Hero() {
     const remeasure = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
+        const width = window.innerWidth;
+        const firstRun = lastWidthRef.current === 0;
+        if (!firstRun && width === lastWidthRef.current) return;
+        lastWidthRef.current = width;
+
         completeAtRef.current = Math.max(1, window.innerHeight * 0.7);
+        startOffsetRef.current = isMobile
+          ? Math.min(72, window.innerHeight * 0.09)
+          : 0;
         measure();
-        applyProgress();
+
+        // Snap (no easing) to the correct spot when geometry actually changes.
+        const p = computeTargetP();
+        targetPRef.current = p;
+        currentPRef.current = p;
+        renderTransform(p);
       });
     };
 
@@ -127,25 +155,52 @@ export default function Hero() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", remeasure);
     };
-  }, [isMobile, reducedMotion, measure, applyProgress]);
+  }, [isMobile, reducedMotion, measure, computeTargetP, renderTransform]);
 
-  // Drive the morph from the scroll position.
+  // Drive the morph from scroll, easing toward the target so mobile's sparse
+  // scroll events (and momentum scrolling) render smoothly. Desktop stays 1:1.
   useEffect(() => {
     if (isMobile === null || reducedMotion || !ready) return;
 
+    const ease = isMobile ? 0.22 : 1;
     let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(applyProgress);
+
+    const tick = () => {
+      const target = targetPRef.current;
+      const next = currentPRef.current + (target - currentPRef.current) * ease;
+      const done = Math.abs(target - next) < 0.0006;
+      currentPRef.current = done ? target : next;
+      renderTransform(currentPRef.current);
+      if (done) {
+        loopingRef.current = false;
+        return;
+      }
+      raf = requestAnimationFrame(tick);
     };
 
+    const ensureLoop = () => {
+      if (loopingRef.current) return;
+      loopingRef.current = true;
+      raf = requestAnimationFrame(tick);
+    };
+
+    const onScroll = () => {
+      targetPRef.current = computeTargetP();
+      ensureLoop();
+    };
+
+    // Sync immediately on (re)mount.
+    targetPRef.current = computeTargetP();
+    currentPRef.current = targetPRef.current;
+    renderTransform(currentPRef.current);
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    applyProgress();
     return () => {
       cancelAnimationFrame(raf);
+      loopingRef.current = false;
       window.removeEventListener("scroll", onScroll);
     };
-  }, [isMobile, reducedMotion, ready, applyProgress]);
+  }, [isMobile, reducedMotion, ready, computeTargetP, renderTransform]);
 
   const heroContent = (
     <motion.div
