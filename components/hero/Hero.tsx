@@ -99,6 +99,10 @@ export default function Hero() {
   const targetPRef = useRef(0);
   const currentPRef = useRef(0);
   const loopingRef = useRef(false);
+  // Whether the hero (start) anchor was measured while in the pinned range, where
+  // it sits at its true on-screen spot. If the page loads scrolled past the pin,
+  // the first measurement is off-screen and must be redone on the way back up.
+  const pinMeasuredRef = useRef(false);
 
   // Paint the morph logo for a given progress 0..1.
   const renderTransform = useCallback((p: number) => {
@@ -140,6 +144,8 @@ export default function Hero() {
           ? Math.min(72, window.innerHeight * 0.09)
           : 0;
         measure();
+        // Only trust the start anchor if we measured it inside the pinned range.
+        pinMeasuredRef.current = window.scrollY <= completeAtRef.current;
 
         // Snap (no easing) to the correct spot when geometry actually changes.
         const p = computeTargetP();
@@ -185,6 +191,12 @@ export default function Hero() {
     };
 
     const onScroll = () => {
+      // Re-measure the hero anchor the first time we scroll back into the pinned
+      // range, in case the page loaded scrolled past it (stale off-screen spot).
+      if (!pinMeasuredRef.current && window.scrollY <= completeAtRef.current) {
+        measure();
+        pinMeasuredRef.current = true;
+      }
       targetPRef.current = computeTargetP();
       ensureLoop();
     };
@@ -200,7 +212,7 @@ export default function Hero() {
       loopingRef.current = false;
       window.removeEventListener("scroll", onScroll);
     };
-  }, [isMobile, reducedMotion, ready, computeTargetP, renderTransform]);
+  }, [isMobile, reducedMotion, ready, measure, computeTargetP, renderTransform]);
 
   const heroContent = (
     <motion.div

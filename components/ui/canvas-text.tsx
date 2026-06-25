@@ -142,13 +142,12 @@ export function CanvasText({
     <span className="relative inline-block font-inherit text-[1em] leading-[inherit] align-baseline">
       <canvas
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full opacity-80"
+        className="absolute inset-0 h-full w-full"
         ref={canvasRef}
       />
       <span
-        className="whitespace-nowrap font-inherit text-[1em] leading-[inherit]"
+        className="invisible whitespace-nowrap font-inherit text-[1em] leading-[inherit]"
         ref={textRef}
-        style={{ color: colors[0] }}
       >
         {text}
       </span>
