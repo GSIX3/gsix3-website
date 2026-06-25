@@ -97,6 +97,30 @@ main {
   }
 }
 
+@keyframes logo-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-33.333%);
+  }
+}
+
+@keyframes logo-scroll-reverse {
+  0% {
+    transform: translateY(-33.333%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*="logo-scroll"] {
+    animation: none;
+  }
+}
+
 .grain-overlay {
   pointer-events: none;
   position: fixed;

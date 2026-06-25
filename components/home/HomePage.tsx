@@ -1,6 +1,9 @@
 import dynamic from "next/dynamic";
+import AnimatedTestimonialsDemo from "@/components/home/AnimatedTestimonialsDemo";
 import ContactCTA from "@/components/home/ContactCTA";
 import Gsix3Saying from "@/components/home/Gsix3Saying";
+import GlowingEffectDemo from "@/components/home/GlowingEffectDemo";
+import LogoCarouselDemo from "@/components/home/LogoCarouselDemo";
 import Testimonials from "@/components/home/Testimonials";
 import WhoWeWorkWith from "@/components/home/WhoWeWorkWith";
 import WhyGsix3 from "@/components/home/WhyGsix3";
@@ -23,12 +26,22 @@ export default function HomePage() {
     <>
       <Hero />
       <WhyGsix3 />
+      <LogoCarouselDemo />
+      <AnimatedTestimonialsDemo />
+      <GlowingEffectDemo />
+
+      
+    
       <Gsix3Saying />
-      <LatestProject />
-      <ServiceShowcase />
+    
+
+      {/* <LatestProject /> */}
+      
+      {/* <ServiceShowcase /> */}
+
       <Testimonials />
-      <WhoWeWorkWith />
-      <ContactCTA compact />
+      {/* <WhoWeWorkWith /> */}
+      {/* <ContactCTA compact /> */}
     </>
   );
 }

@@ -2,6 +2,8 @@
 
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import { CanvasText } from "@/components/ui/canvas-text";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 const blueTheme = {
   backgroundClassName: "bg-blue-600",
@@ -29,11 +31,26 @@ const purpleTheme = {
 
 export default function Gsix3Saying() {
   return (
-    <section className="bg-white py-8 sm:py-16 md:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-slate-950 pt-6 pb-8 sm:pt-10 sm:pb-16 md:pt-16 md:pb-28">
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <ShootingStars
+          starColor="#7dd3fc"
+          trailColor="#38bdf8"
+          starWidth={26}
+          starHeight={3}
+          minSpeed={14}
+          maxSpeed={34}
+          minDelay={500}
+          maxDelay={1800}
+          className="[filter:drop-shadow(0_0_6px_rgba(56,189,248,0.9))]"
+        />
+        <StarsBackground />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <ScrollReveal>
           <div className="flex min-h-40 items-center justify-center px-0 sm:min-h-64 md:min-h-80 md:px-8">
-            <h2 className="font-heading group relative mx-auto w-full max-w-none text-center text-[clamp(1.35rem,5.9vw,1.65rem)] font-bold leading-[1.15] tracking-tight text-slate-950 sm:max-w-2xl sm:text-5xl md:max-w-4xl md:text-6xl md:leading-tight xl:text-7xl">
+            <h2 className="font-heading group relative mx-auto w-full max-w-none text-center text-[clamp(1.35rem,5.9vw,1.65rem)] font-bold leading-[1.15] tracking-tight text-white sm:max-w-2xl sm:text-5xl md:max-w-4xl md:text-6xl md:leading-tight xl:text-7xl">
               <span className="block whitespace-nowrap">
                 Innovation{" "}
                 <CanvasText

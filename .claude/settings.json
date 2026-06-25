@@ -21,7 +21,10 @@
       "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1; rm -f /c/Users/WW/AppData/Local/Temp/gap-1440.png /tmp/emul4.mjs 2>/dev/null; echo cleaned)",
       "Bash(ls -la *.png *.svg)",
       "Bash(ls -la assets/)",
-      "Bash(node -e \"try{require.resolve\\('playwright'\\);console.log\\('playwright-core present'\\)}catch\\(e\\){console.log\\('no playwright'\\)}\")"
+      "Bash(node -e \"try{require.resolve\\('playwright'\\);console.log\\('playwright-core present'\\)}catch\\(e\\){console.log\\('no playwright'\\)}\")",
+      "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1; rm -f /c/Users/WW/AppData/Local/Temp/lc4.png /tmp/lc4.mjs 2>/dev/null; echo cleaned)",
+      "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1; rm -f /c/Users/WW/AppData/Local/Temp/p1.png /c/Users/WW/AppData/Local/Temp/p2-*.png /tmp/p.mjs /tmp/p2.mjs 2>/dev/null; echo cleaned)",
+      "Bash(taskkill //F //IM msedge.exe >/dev/null 2>&1 *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\WW\\AppData\\Local\\Temp",

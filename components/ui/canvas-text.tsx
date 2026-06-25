@@ -51,7 +51,7 @@ export function CanvasText({
   const activeColorsRef = useRef(colors);
   const previousColorsRef = useRef(colors);
   const targetColorsRef = useRef(colors);
-  const transitionStartRef = useRef(performance.now());
+  const transitionStartRef = useRef(0);
 
   useEffect(() => {
     previousColorsRef.current = activeColorsRef.current;
@@ -68,15 +68,23 @@ export function CanvasText({
     if (!context) return;
 
     let animationFrame = 0;
+    let resizeFrame = 0;
     let startTime = performance.now();
 
     const resize = () => {
       const rect = textElement.getBoundingClientRect();
       const scale = window.devicePixelRatio || 1;
+      const width = Math.max(1, rect.width);
+      const height = Math.max(1, rect.height);
 
-      canvas.width = rect.width * scale;
-      canvas.height = rect.height * scale;
+      canvas.width = width * scale;
+      canvas.height = height * scale;
       context.setTransform(scale, 0, 0, scale, 0, 0);
+    };
+
+    const scheduleResize = () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(resize);
     };
 
     const draw = (time: number) => {
@@ -126,14 +134,22 @@ export function CanvasText({
       animationFrame = requestAnimationFrame(draw);
     };
 
-    resize();
+    scheduleResize();
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(textElement);
+    window.addEventListener("resize", scheduleResize);
+    window.addEventListener("orientationchange", scheduleResize);
+    document.fonts?.ready.then(scheduleResize).catch(() => undefined);
+    const settleTimeout = window.setTimeout(scheduleResize, 250);
     animationFrame = requestAnimationFrame(draw);
 
     return () => {
       cancelAnimationFrame(animationFrame);
+      cancelAnimationFrame(resizeFrame);
+      window.clearTimeout(settleTimeout);
       resizeObserver.disconnect();
+      window.removeEventListener("resize", scheduleResize);
+      window.removeEventListener("orientationchange", scheduleResize);
       startTime = 0;
     };
   }, [animationDuration, lineGap, text]);
