@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import {
   motion,
   useMotionTemplate,
@@ -12,46 +13,82 @@ import { AnimatedUnderline } from "@/components/ui/animated-underline";
 import { GradientHeading } from "@/components/ui/gradient-heading";
 import LogoCarousel, { type Logo } from "@/components/ui/logo-carousel";
 
-const customerLogoMarks = {
-  bowatta: (
-    <span className="font-heading text-lg font-black uppercase tracking-[0.08em] text-emerald-700 sm:text-3xl sm:tracking-[0.14em] md:text-4xl">
-      Bowatta
-    </span>
-  ),
-  vida: (
-    <span className="font-heading text-xl font-black uppercase tracking-[0.12em] text-slate-950 sm:text-4xl sm:tracking-[0.2em] md:text-5xl">
-      VIDA
-    </span>
-  ),
-  atlacarte: (
-    <span className="font-heading text-lg font-black tracking-tight text-orange-500 sm:text-3xl md:text-5xl">
-      Atlacarte
-    </span>
-  ),
-  gsix3: (
-    <span className="font-heading text-xl font-black tracking-tight text-purple-700 sm:text-4xl md:text-5xl">
-      GSIX3
-    </span>
-  ),
-  vidaData: (
-    <span className="rounded-xl bg-slate-950 px-3 py-2 font-heading text-lg font-black uppercase tracking-[0.12em] text-white sm:rounded-2xl sm:px-5 sm:py-3 sm:text-2xl sm:tracking-[0.16em] md:text-3xl">
-      VIDA
-    </span>
-  ),
-  retail: (
-    <span className="rounded-xl bg-emerald-100 px-3 py-2 font-heading text-lg font-black uppercase tracking-[0.08em] text-emerald-800 sm:rounded-2xl sm:px-5 sm:py-3 sm:text-2xl sm:tracking-[0.12em] md:text-3xl">
-      Retail
-    </span>
-  ),
-};
+function assetPath(folder: string, file: string) {
+  return `/assets/${folder}/${encodeURIComponent(file)}`;
+}
+
+function carouselLogo(src: string, name: string) {
+  return (
+    <Image
+      src={src}
+      alt={name}
+      width={280}
+      height={112}
+      className="h-20 w-auto max-w-[180px] object-contain sm:h-24 sm:max-w-[220px] md:h-28 md:max-w-[260px]"
+      unoptimized
+    />
+  );
+}
+
+const technologyLogos: Logo[] = [
+  {
+    name: "Python",
+    mark: carouselLogo(assetPath("technologies", "python logo.png"), "Python"),
+  },
+  {
+    name: "React",
+    mark: carouselLogo(assetPath("technologies", "react logo.png"), "React"),
+  },
+  {
+    name: "Next.js",
+    mark: carouselLogo(assetPath("technologies", "nextjs logo.png"), "Next.js"),
+  },
+  {
+    name: "PostgreSQL",
+    mark: carouselLogo(
+      assetPath("technologies", "postgresql.png"),
+      "PostgreSQL",
+    ),
+  },
+  {
+    name: "Arduino",
+    mark: carouselLogo(
+      assetPath("technologies", "arduino logo.png"),
+      "Arduino",
+    ),
+  },
+  {
+    name: "Raspberry Pi",
+    mark: carouselLogo(
+      assetPath("technologies", "raspberrypi logo.png"),
+      "Raspberry Pi",
+    ),
+  },
+];
 
 const customerLogos: Logo[] = [
-  { name: "Bowatta", mark: customerLogoMarks.bowatta },
-  { name: "VIDA Edgewater", mark: customerLogoMarks.vida },
-  { name: "Atlacarte", mark: customerLogoMarks.atlacarte },
-  { name: "GSIX3", mark: customerLogoMarks.gsix3 },
-  { name: "VIDA Data", mark: customerLogoMarks.vidaData },
-  { name: "Bowatta Retail", mark: customerLogoMarks.retail },
+  {
+    name: "Bowatte Ayurveda",
+    mark: carouselLogo(
+      assetPath("customers", "Bowatte1.png"),
+      "Bowatte Ayurveda",
+    ),
+  },
+  {
+    name: "Jansiri Motor Stores",
+    mark: carouselLogo(
+      assetPath("customers", "JMS1.png"),
+      "Jansiri Motor Stores",
+    ),
+  },
+  {
+    name: "JGP Marketing",
+    mark: carouselLogo(assetPath("customers", "JGP1.png"), "JGP Marketing"),
+  },
+  {
+    name: "GSIX",
+    mark: carouselLogo(assetPath("customers", "GSIX1.png"), "GSIX"),
+  },
 ];
 
 function HeadingBlock({ customers }: { customers: boolean }) {
@@ -104,28 +141,19 @@ export default function LogoCarouselDemo() {
   // Aligned opacity crossfade with a blur dissolve, so the overlap reads as a
   // soft morph rather than two texts ghosting over each other.
   const techOpacity = useTransform(smoothProgress, [0, 0.2, 0.4], [1, 1, 0]);
-  const custOpacity = useTransform(
-    smoothProgress,
-    [0.28, 0.46, 1],
-    [0, 1, 1],
-  );
+  const custOpacity = useTransform(smoothProgress, [0.28, 0.46, 1], [0, 1, 1]);
   const techBlur = useTransform(smoothProgress, [0.22, 0.4], [0, 8]);
-  const custBlur = useTransform(
-    smoothProgress,
-    [0.28, 0.46],
-    [8, 0],
-  );
+  const custBlur = useTransform(smoothProgress, [0.28, 0.46], [8, 0]);
   const techY = useTransform(smoothProgress, [0.2, 0.4], [0, -18]);
-  const custY = useTransform(
-    smoothProgress,
-    [0.28, 0.46],
-    [18, 0],
-  );
+  const custY = useTransform(smoothProgress, [0.28, 0.46], [18, 0]);
   const techFilter = useMotionTemplate`blur(${techBlur}px)`;
   const custFilter = useMotionTemplate`blur(${custBlur}px)`;
 
   return (
-    <section ref={sectionRef} className="relative h-[170vh] bg-white md:h-[220vh]">
+    <section
+      ref={sectionRef}
+      className="relative h-[170vh] bg-white md:h-[220vh]"
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_22%,rgba(168,85,247,0.16),transparent_32%),radial-gradient(circle_at_18%_62%,rgba(126,34,206,0.08),transparent_30%),radial-gradient(circle_at_82%_62%,rgba(192,132,252,0.1),transparent_30%)]" />
       {/* Pins to the viewport while the page scrolls through the section */}
       <div className="sticky top-0 h-screen overflow-hidden">
@@ -136,7 +164,11 @@ export default function LogoCarouselDemo() {
             className="absolute inset-0 flex flex-col items-center justify-center gap-8 px-4 sm:px-6 md:gap-10"
           >
             <HeadingBlock customers={false} />
-            <LogoCarousel columnCount={3} />
+            <LogoCarousel
+              columnCount={3}
+              logos={technologyLogos}
+              size="large"
+            />
           </motion.div>
 
           {/* State 2 — customers */}
@@ -145,7 +177,7 @@ export default function LogoCarouselDemo() {
             className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-8 px-4 sm:px-6 md:gap-10"
           >
             <HeadingBlock customers />
-            <LogoCarousel columnCount={3} logos={customerLogos} />
+            <LogoCarousel columnCount={3} logos={customerLogos} size="large" />
           </motion.div>
         </div>
 

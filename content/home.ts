@@ -30,6 +30,64 @@ export const homeContent = {
         image: "/onur.png",
       },
     ],
+    reviews: [
+      {
+        id: "review-1",
+        company: "Bowatte Beheth Shalawa (Pvt) Ltd",
+        quote:
+          "Tracking attendance across multiple locations was a nightmare before GSIX3. Now everything is centralized, accurate, and accessible right from our phones.",
+        logo: "/assets/customers/Bowatte1.png",
+      },
+      {
+        id: "review-2",
+        company: "Janasiri Motor Stores",
+        quote:
+          "Cheque management used to mean spreadsheets and missed follow-ups. GSIX3 built us a system that keeps everything organized and on track automatically.",
+        logo: "/assets/customers/JMS1.png",
+      },
+      {
+        id: "review-3",
+        company: "GSIX",
+        quote:
+          "The website looks premium and the backend is so easy to manage. GSIX3 nailed both the design and the functionality.",
+        logo: "/assets/customers/GSIX1.png",
+      },
+      {
+        id: "review-4",
+        company: "JGP Marketing Services (Pvt) Ltd",
+        quote:
+          "The mobile app was a game changer for our field team. Real-time updates, clean interface, and it just works. GSIX3 delivered beyond what we scoped.",
+        logo: "/assets/customers/JGP1.png",
+      },
+      {
+        id: "review-5",
+        company: "JGP Marketing Services (Pvt) Ltd",
+        quote:
+          "The distribution system GSIX3 built handles our entire order pipeline without breaking a sweat. It's reliable, fast, and our team adapted to it instantly.",
+        logo: "/assets/customers/JGP1.png",
+      },
+      {
+        id: "review-6",
+        company: "Bowatte Beheth Shalawa (Pvt) Ltd",
+        quote:
+          "We didn't expect a system this polished for our scale. GSIX3 delivered something that genuinely changed how we manage our teams day to day.",
+        logo: "/assets/customers/Bowatte1.png",
+      },
+      {
+        id: "review-7",
+        company: "GSIX",
+        quote:
+          "Updating our website with new arrivals used to require calling a developer every time. Now our team does it in minutes through the admin panel GSIX3 built.",
+        logo: "/assets/customers/GSIX1.png",
+      },
+      {
+        id: "review-8",
+        company: "Janasiri Motor Stores",
+        quote:
+          "Simple, effective, and built exactly around how we work. GSIX3 didn't overcomplicate it—they solved the problem cleanly and efficiently.",
+        logo: "/assets/customers/JMS1.png",
+      },
+    ],
   },
   partners: {
     title: "Who We Work With",

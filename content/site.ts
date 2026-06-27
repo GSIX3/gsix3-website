@@ -4,7 +4,7 @@ export const site = {
   description:
     "GSIX3 partners with enterprises and startups to build web applications, AI, data science, cloud, and mobile solutions that drive real business outcomes.",
   url: "https://www.gsix3.com",
-  email: "hello@gsix3.com",
+  email: "gsix0003@gmail.com",
   established: "2025",
   logoVersion: "2",
   nav: [
