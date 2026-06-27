@@ -95,12 +95,15 @@ const defaultLogos: Logo[] = [
 type LogoCarouselProps = {
   columnCount?: number;
   logos?: Logo[];
+  size?: "default" | "large";
 };
 
 export default function LogoCarousel({
   columnCount = 3,
   logos = defaultLogos,
+  size = "default",
 }: LogoCarouselProps) {
+  const isLarge = size === "large";
   const [logoIndexes, setLogoIndexes] = useState(() =>
     Array.from({ length: columnCount }, (_, index) => index % logos.length),
   );
@@ -145,10 +148,20 @@ export default function LogoCarousel({
   }, [columnCount, logos]);
 
   return (
-    <div className="grid w-full max-w-[20rem] grid-cols-3 items-center gap-5 sm:max-w-3xl sm:gap-10 md:gap-16">
+    <div
+      className={
+        isLarge
+          ? "grid w-full max-w-[26rem] grid-cols-3 items-center gap-6 sm:max-w-4xl sm:gap-12 md:gap-16"
+          : "grid w-full max-w-[20rem] grid-cols-3 items-center gap-5 sm:max-w-3xl sm:gap-10 md:gap-16"
+      }
+    >
       {visibleLogos.map((logo, index) => (
         <div
-          className="flex h-20 min-w-0 items-center justify-center overflow-visible sm:h-24 md:h-28"
+          className={
+            isLarge
+              ? "flex h-24 min-w-0 items-center justify-center overflow-visible sm:h-28 md:h-32"
+              : "flex h-20 min-w-0 items-center justify-center overflow-visible sm:h-24 md:h-28"
+          }
           key={index}
         >
           <AnimatePresence mode="wait">

@@ -5,24 +5,23 @@ import { StarsBackground } from "@/components/ui/stars-background";
 
 const reasons = [
   {
-    title: "Senior engineers only",
+    title: "The right people, zero handoffs",
     description:
-      "Every line is shipped by experienced engineers — no juniors learning on your budget, no hand-offs to offshore teams.",
+      "Your systems are built and owned by dedicated engineers from start to finish.",
   },
   {
-    title: "Production-grade by default",
+    title: "Built to last, not just to launch",
     description:
-      "We architect for reliability, security, and scale from day one — not as an afterthought once things break.",
+      "We engineer for scale, security, and maintainability from the first commit — not after your first incident.",
   },
   {
-    title: "AI-native systems",
+    title: "Intelligent automation, not just integration",
     description:
-      "From RAG pipelines to agentic workflows, we build intelligent systems that actually make it to production.",
+      "We architect intelligent systems end-to-end, from data to deployment.",
   },
   {
-    title: "A real partnership",
-    description:
-      "We embed with your team, move at startup speed, and own outcomes — not just close tickets.",
+    title: "We succeed when you succeed",
+    description: "We measure success by your growth, not our delivery count",
   },
 ];
 
@@ -67,8 +66,8 @@ export default function WhyGsix3() {
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
             We&apos;re a focused engineering team that enterprises and
-            growth-stage startups trust to build the systems their business
-            runs on. Here&apos;s what sets us apart.
+            growth-stage startups trust to build the systems their business runs
+            on. Here&apos;s what sets us apart.
           </p>
         </ScrollReveal>
 
