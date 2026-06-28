@@ -1,15 +1,78 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 import { site } from "@/content/site";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 
+const SERVICE_ID =
+  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "YOUR_SERVICE_ID";
+const TEMPLATE_ID =
+  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "YOUR_TEMPLATE_ID";
+const PUBLIC_KEY =
+  process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "YOUR_PUBLIC_KEY";
+
+const PLACEHOLDER_VALUES = new Set([
+  "YOUR_SERVICE_ID",
+  "YOUR_TEMPLATE_ID",
+  "YOUR_PUBLIC_KEY",
+]);
+
+function isEmailJsConfigured() {
+  return (
+    !PLACEHOLDER_VALUES.has(SERVICE_ID) &&
+    !PLACEHOLDER_VALUES.has(TEMPLATE_ID) &&
+    !PLACEHOLDER_VALUES.has(PUBLIC_KEY)
+  );
+}
+
 export default function ContactCTA({ compact = false }: { compact?: boolean }) {
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setValidationError(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = (formData.get("name") as string).trim();
+    const email = (formData.get("email") as string).trim();
+    const message = (formData.get("message") as string).trim();
+
+    if (!name || !email || !message) {
+      setValidationError("Please fill in all fields.");
+      return;
+    }
+
+    if (!isEmailJsConfigured()) {
+      setError(
+        "Email service is not configured yet. Add your EmailJS credentials to .env.local and restart the dev server.",
+      );
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        { name, email, message },
+        { publicKey: PUBLIC_KEY },
+      );
+      setSubmitted(true);
+    } catch (err) {
+      console.error("EmailJS send failed:", err);
+      setError(
+        "Something went wrong. Please try again or email us directly at gsix0003@gmail.com",
+      );
+    } finally {
+      setIsSending(false);
+    }
   }
 
   return (
@@ -44,7 +107,7 @@ export default function ContactCTA({ compact = false }: { compact?: boolean }) {
             {submitted ? (
               <div className="flex items-center rounded-2xl border border-accent/30 bg-accent/5 p-8">
                 <p className="font-heading text-xl text-text">
-                  Message sent. We&apos;ll be in touch soon.
+                  Message sent! We&apos;ll get back to you within one business day.
                 </p>
               </div>
             ) : (
@@ -87,11 +150,18 @@ export default function ContactCTA({ compact = false }: { compact?: boolean }) {
                     className="w-full resize-none rounded-lg border border-border bg-bg-elevated px-4 py-3 text-sm text-text outline-none transition-colors focus:border-accent/50"
                   />
                 </div>
+                {validationError ? (
+                  <p className="text-sm text-red-600">{validationError}</p>
+                ) : null}
+                {error ? (
+                  <p className="text-sm text-red-600">{error}</p>
+                ) : null}
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-bright sm:w-auto"
+                  disabled={isSending}
+                  className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-bright disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                 >
-                  Send message
+                  {isSending ? "Sending..." : "Send message"}
                 </button>
               </form>
             )}

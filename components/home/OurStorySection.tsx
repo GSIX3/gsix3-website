@@ -6,7 +6,7 @@ const officePhotoSrc = "/assets/office.jpeg";
 
 export default function OurStorySection() {
   return (
-    <section className="border-y border-border py-24 md:py-32">
+    <section id="about" className="border-y border-border py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-16">
@@ -25,10 +25,10 @@ export default function OurStorySection() {
 
             <div className="order-1 space-y-16 md:space-y-20 lg:order-2">
               <div>
-                <h2 className="font-heading text-3xl font-semibold tracking-tight text-text md:text-4xl lg:text-[2.75rem]">
+                <h2 className="font-heading text-4xl font-semibold tracking-tight text-text md:text-5xl lg:text-[3.25rem]">
                   Our Story
                 </h2>
-                <p className="mt-4 text-lg font-medium text-text md:text-xl">
+                <p className="mt-4 text-lg font-medium text-accent md:text-xl">
                   Three Engineers. One Vision.
                 </p>
                 <p className="mt-6 text-justify text-base leading-relaxed text-text md:text-lg">

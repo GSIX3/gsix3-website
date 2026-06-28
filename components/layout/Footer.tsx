@@ -1,17 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { site } from "@/content/site";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
+import { cn, handleSectionNavClick } from "@/lib/utils";
 
 const footerLinks = [
-  { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
+  { label: "Services", href: "/#services" },
+  { label: "Websites", href: "/pricing" },
+  { label: "Products", href: "/#portfolio" },
   { label: "FAQs", href: "#" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/#about" },
   { label: "Careers", href: "#" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const policies = [
@@ -52,6 +54,8 @@ const socials = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isLight = pathname === "/pricing";
   const year = new Date().getFullYear();
 
   function scrollToTop() {
@@ -59,21 +63,28 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden bg-slate-950 text-white">
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <ShootingStars
-          starColor="#7dd3fc"
-          trailColor="#38bdf8"
-          starWidth={26}
-          starHeight={3}
-          minSpeed={14}
-          maxSpeed={34}
-          minDelay={500}
-          maxDelay={1800}
-          className="[filter:drop-shadow(0_0_6px_rgba(56,189,248,0.9))]"
-        />
-        <StarsBackground />
-      </div>
+    <footer
+      className={cn(
+        "relative overflow-hidden",
+        isLight ? "bg-white text-text" : "bg-slate-950 text-white",
+      )}
+    >
+      {!isLight && (
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <ShootingStars
+            starColor="#7dd3fc"
+            trailColor="#38bdf8"
+            starWidth={26}
+            starHeight={3}
+            minSpeed={14}
+            maxSpeed={34}
+            minDelay={500}
+            maxDelay={1800}
+            className="[filter:drop-shadow(0_0_6px_rgba(56,189,248,0.9))]"
+          />
+          <StarsBackground />
+        </div>
+      )}
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 md:py-20">
         {/* Brand + links | Let's talk */}
@@ -81,16 +92,31 @@ export default function Footer() {
           <div className="flex-1">
             <p className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
               {site.name}
-              <span className="text-teal-300">.</span>
+              <span className={isLight ? "text-accent" : "text-teal-300"}>.</span>
             </p>
-            <p className="mt-3 max-w-xs text-sm text-white/60">{site.tagline}</p>
+            <p
+              className={cn(
+                "mt-3 max-w-xs text-sm",
+                isLight ? "text-text-muted" : "text-white/60",
+              )}
+            >
+              {site.tagline}
+            </p>
 
             <nav className="mt-10 grid max-w-md grid-cols-2 gap-x-10 gap-y-3 text-sm sm:grid-cols-3">
               {footerLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-white/75 transition-colors hover:text-white"
+                  onClick={(event) =>
+                    handleSectionNavClick(event, link.href, pathname)
+                  }
+                  className={cn(
+                    "transition-colors",
+                    isLight
+                      ? "text-text-muted hover:text-accent"
+                      : "text-white/75 hover:text-white",
+                  )}
                 >
                   {link.label}
                 </Link>
@@ -99,12 +125,20 @@ export default function Footer() {
           </div>
 
           <div className="md:pl-10 md:text-right">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55">
+            <p
+              className={cn(
+                "text-[11px] font-semibold uppercase tracking-[0.22em]",
+                isLight ? "text-text-muted" : "text-white/55",
+              )}
+            >
               Got a project in mind?
             </p>
             <Link
               href="/contact"
-              className="mt-3 inline-block font-heading text-5xl font-medium leading-none tracking-tight transition-colors hover:text-teal-300 md:text-6xl"
+              className={cn(
+                "mt-3 inline-block font-heading text-5xl font-medium leading-none tracking-tight transition-colors md:text-6xl",
+                isLight ? "text-accent hover:text-accent-bright" : "hover:text-teal-300",
+              )}
             >
               Let&apos;s talk
             </Link>
@@ -112,16 +146,29 @@ export default function Footer() {
         </div>
 
         {/* Dashed divider */}
-        <div className="mt-14 border-t border-dashed border-white/30" />
+        <div
+          className={cn(
+            "mt-14 border-t border-dashed",
+            isLight ? "border-border" : "border-white/30",
+          )}
+        />
 
         {/* Policies + socials */}
         <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/65">
+          <div
+            className={cn(
+              "flex flex-wrap gap-x-6 gap-y-2 text-xs",
+              isLight ? "text-text-muted" : "text-white/65",
+            )}
+          >
             {policies.map((policy) => (
               <Link
                 key={policy.label}
                 href={policy.href}
-                className="transition-colors hover:text-white"
+                className={cn(
+                  "transition-colors",
+                  isLight ? "hover:text-accent" : "hover:text-white",
+                )}
               >
                 {policy.label}
               </Link>
@@ -134,7 +181,12 @@ export default function Footer() {
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/80 transition-colors hover:border-white hover:bg-white/10 hover:text-white"
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-full border transition-colors",
+                  isLight
+                    ? "border-border text-text-muted hover:border-accent hover:text-accent"
+                    : "border-white/25 text-white/80 hover:border-white hover:bg-white/10 hover:text-white",
+                )}
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
                   {social.icon}
@@ -150,7 +202,12 @@ export default function Footer() {
             type="button"
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+            className={cn(
+              "flex h-12 w-12 items-center justify-center rounded-full transition-colors",
+              isLight
+                ? "border border-border bg-bg-elevated text-text hover:border-accent hover:text-accent"
+                : "bg-white/10 text-white hover:bg-white/20",
+            )}
           >
             <svg
               viewBox="0 0 24 24"
@@ -165,7 +222,12 @@ export default function Footer() {
             </svg>
           </button>
 
-          <p className="text-xs text-white/55">
+          <p
+            className={cn(
+              "text-xs",
+              isLight ? "text-text-muted" : "text-white/55",
+            )}
+          >
             © {year} {site.name} · Est. {site.established}
           </p>
         </div>

@@ -7,7 +7,7 @@ export default function AnimatedTestimonialsDemo() {
       description:
         "A secure and scalable platform designed to streamline pharmaceutical distribution. Features include order management, inventory tracking, delivery monitoring, and real-time reporting to improve operational efficiency.",
       src: "/assets/product-showcase/ai-suite.png",
-      customers: ["JGP Marketing"],
+      customers: ["JGP Marketing Services (Pvt) Ltd"],
     },
     {
       title: "Cheque Management System",
@@ -21,7 +21,7 @@ export default function AnimatedTestimonialsDemo() {
       description:
         "A comprehensive attendance management platform that supports multiple branches and locations. The system integrates fingerprint, facial recognition, and RFID technologies to accurately track employee attendance across different sectors from a single dashboard.",
       src: "/assets/product-showcase/data-dashboard.png",
-      customers: ["Bowatte"],
+      customers: ["Bowatte Beheth Shalawa (Pvt) Ltd"],
     },
   ];
 
