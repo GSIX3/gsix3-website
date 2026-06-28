@@ -25,7 +25,7 @@ function StarRating() {
 
 function ReviewCard({ company, quote, logo }: ReviewItem) {
   return (
-    <article className="flex w-[16rem] shrink-0 flex-col rounded-xl border border-border bg-white p-4 shadow-sm sm:w-[19rem] sm:p-5 md:w-[22rem]">
+    <article className="mx-auto flex w-full max-w-[18rem] shrink-0 flex-col rounded-xl border border-border bg-white p-4 shadow-sm sm:max-w-[19rem] sm:p-5 md:max-w-[22rem]">
       <h3 className="text-sm font-semibold leading-snug text-text sm:text-[0.9375rem]">
         {company}
       </h3>
@@ -88,8 +88,12 @@ export default function Testimonials() {
           </h2>
         </ScrollReveal>
 
-        <div className="relative mx-auto h-[24rem] w-full overflow-hidden sm:h-[28rem] md:h-[32rem]">
-          <div className="mx-auto grid h-full w-full max-w-4xl grid-cols-2 items-center justify-items-center gap-x-6 md:gap-x-8">
+        <div className="relative mx-auto w-full overflow-hidden md:h-[32rem]">
+          <div className="h-[24rem] md:hidden">
+            <ReviewMarquee reviews={reviews} />
+          </div>
+
+          <div className="mx-auto hidden w-full max-w-4xl md:grid md:h-full md:grid-cols-2 md:items-center md:justify-items-center md:gap-x-8">
             {reviewColumns.map((column) => (
               <div key={column.key} className="h-full">
                 <ReviewMarquee
@@ -101,9 +105,9 @@ export default function Testimonials() {
           </div>
 
           <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-bg-elevated/30 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg-elevated/30 to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-bg-elevated/30 to-transparent sm:w-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-bg-elevated/30 to-transparent sm:w-20" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg-elevated/30 to-transparent md:h-20" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-20 bg-gradient-to-r from-bg-elevated/30 to-transparent md:block" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-20 bg-gradient-to-l from-bg-elevated/30 to-transparent md:block" />
         </div>
       </div>
     </section>

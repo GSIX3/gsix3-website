@@ -6,6 +6,7 @@ import GlowingEffectDemo from "@/components/home/GlowingEffectDemo";
 import LogoCarouselDemo from "@/components/home/LogoCarouselDemo";
 import Testimonials from "@/components/home/Testimonials";
 import WhoWeWorkWith from "@/components/home/WhoWeWorkWith";
+import OurStorySection from "@/components/home/OurStorySection";
 import WhyGsix3 from "@/components/home/WhyGsix3";
 
 const Hero = dynamic(() => import("@/components/hero/Hero"), {
@@ -25,6 +26,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <OurStorySection />
       <WhyGsix3 />
       <LogoCarouselDemo />
       <AnimatedTestimonialsDemo />
