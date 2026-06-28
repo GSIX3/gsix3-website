@@ -24,7 +24,7 @@ function carouselLogo(src: string, name: string) {
       alt={name}
       width={280}
       height={112}
-      className="h-20 w-auto max-w-[180px] object-contain sm:h-24 sm:max-w-[220px] md:h-28 md:max-w-[260px]"
+      className="h-14 w-auto max-w-full object-contain sm:h-24 sm:max-w-[220px] md:h-28 md:max-w-[260px]"
       unoptimized
     />
   );

@@ -98,14 +98,34 @@ type LogoCarouselProps = {
   size?: "default" | "large";
 };
 
+function useResponsiveColumnCount(columnCount: number) {
+  const [resolvedCount, setResolvedCount] = useState(columnCount);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 639px)");
+    const update = () =>
+      setResolvedCount(media.matches ? Math.min(2, columnCount) : columnCount);
+
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [columnCount]);
+
+  return resolvedCount;
+}
+
 export default function LogoCarousel({
   columnCount = 3,
   logos = defaultLogos,
   size = "default",
 }: LogoCarouselProps) {
   const isLarge = size === "large";
+  const resolvedColumnCount = useResponsiveColumnCount(columnCount);
   const [logoIndexes, setLogoIndexes] = useState(() =>
-    Array.from({ length: columnCount }, (_, index) => index % logos.length),
+    Array.from(
+      { length: resolvedColumnCount },
+      (_, index) => index % logos.length,
+    ),
   );
   const visibleLogos = logoIndexes
     .map((logoIndex) => logos[logoIndex])
@@ -113,16 +133,20 @@ export default function LogoCarousel({
 
   useEffect(() => {
     setLogoIndexes(
-      Array.from({ length: columnCount }, (_, index) => index % logos.length),
+      Array.from(
+        { length: resolvedColumnCount },
+        (_, index) => index % logos.length,
+      ),
     );
-  }, [columnCount, logos]);
+  }, [resolvedColumnCount, logos]);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
       setLogoIndexes((currentIndexes) => {
-        const changeCount = Math.floor(Math.random() * columnCount) + 1;
+        const changeCount =
+          Math.floor(Math.random() * resolvedColumnCount) + 1;
         const columnsToUpdate = new Set(
-          Array.from({ length: columnCount }, (_, index) => index)
+          Array.from({ length: resolvedColumnCount }, (_, index) => index)
             .sort(() => Math.random() - 0.5)
             .slice(0, changeCount),
         );
@@ -145,22 +169,22 @@ export default function LogoCarousel({
     }, 1800);
 
     return () => window.clearInterval(interval);
-  }, [columnCount, logos]);
+  }, [resolvedColumnCount, logos]);
 
   return (
     <div
       className={
         isLarge
-          ? "grid w-full max-w-[26rem] grid-cols-3 items-center gap-6 sm:max-w-4xl sm:gap-12 md:gap-16"
-          : "grid w-full max-w-[20rem] grid-cols-3 items-center gap-5 sm:max-w-3xl sm:gap-10 md:gap-16"
+          ? "grid w-full max-w-[18rem] grid-cols-2 items-center gap-x-4 gap-y-6 sm:max-w-4xl sm:grid-cols-3 sm:gap-12 md:gap-16"
+          : "grid w-full max-w-[16rem] grid-cols-2 items-center gap-x-4 gap-y-5 sm:max-w-3xl sm:grid-cols-3 sm:gap-10 md:gap-16"
       }
     >
       {visibleLogos.map((logo, index) => (
         <div
           className={
             isLarge
-              ? "flex h-24 min-w-0 items-center justify-center overflow-visible sm:h-28 md:h-32"
-              : "flex h-20 min-w-0 items-center justify-center overflow-visible sm:h-24 md:h-28"
+              ? "flex h-20 min-w-0 items-center justify-center overflow-hidden sm:h-28 md:h-32"
+              : "flex h-16 min-w-0 items-center justify-center overflow-hidden sm:h-24 md:h-28"
           }
           key={index}
         >

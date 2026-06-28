@@ -63,7 +63,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out ${
+        className={`fixed inset-x-0 top-0 ${open ? "z-[90]" : "z-50"} border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out ${
           open
             ? "border-transparent bg-transparent"
             : scrolled || !isHome
@@ -128,7 +128,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className={`relative z-[60] flex h-11 w-11 items-center justify-center rounded-full border transition-colors md:hidden ${
+            className={`relative z-[60] flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors md:hidden ${
               open
                 ? "border-border bg-bg text-text"
                 : "border-border bg-bg/80 text-text backdrop-blur-sm"
@@ -138,20 +138,20 @@ export default function Navbar() {
             aria-controls="mobile-nav"
             onClick={() => setOpen((value) => !value)}
           >
-            <span className="relative block h-4 w-5">
+            <span className="relative flex size-5 items-center justify-center">
               <span
-                className={`absolute left-0 top-0 block h-0.5 w-5 bg-current transition-all duration-300 ${
-                  open ? "top-[7px] rotate-45" : ""
+                className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+                  open ? "rotate-45" : "-translate-y-[6px]"
                 }`}
               />
               <span
-                className={`absolute left-0 top-[7px] block h-0.5 w-5 bg-current transition-all duration-300 ${
-                  open ? "opacity-0" : "opacity-100"
+                className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+                  open ? "scale-x-0 opacity-0" : "opacity-100"
                 }`}
               />
               <span
-                className={`absolute left-0 top-[14px] block h-0.5 w-5 bg-current transition-all duration-300 ${
-                  open ? "top-[7px] -rotate-45" : ""
+                className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+                  open ? "-rotate-45" : "translate-y-[6px]"
                 }`}
               />
             </span>
@@ -170,12 +170,12 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={reducedMotion ? undefined : { opacity: 0 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="fixed inset-0 z-40 flex flex-col bg-bg md:hidden"
+            className="fixed inset-0 z-[80] flex flex-col bg-bg md:hidden"
           >
             <div className="h-[var(--nav-height)] shrink-0" aria-hidden="true" />
 
-            <nav className="flex flex-1 flex-col px-6 pb-8 pt-4">
-              <div className="flex flex-1 flex-col justify-center gap-1">
+            <nav className="flex min-h-0 flex-1 flex-col px-6 pb-8 pt-8">
+              <div className="flex flex-col">
                 {site.nav.map((item, index) => (
                   <motion.div
                     key={item.href}
@@ -216,7 +216,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={reducedMotion ? undefined : { opacity: 0 }}
                 transition={{ duration: 0.35, delay: reducedMotion ? 0 : 0.28, ease: EASE }}
-                className="mt-8 space-y-5 border-t border-border pt-8"
+                className="mt-auto space-y-5 border-t border-border pt-8"
               >
                 <Button
                   href="/contact"
