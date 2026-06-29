@@ -332,7 +332,7 @@ export default function Hero() {
 
   const heroStage = (
     <div className="relative flex min-h-svh w-full items-center bg-white">
-      <div className="mx-auto grid w-full max-w-[94rem] grid-cols-1 items-center gap-12 px-4 pt-8 pb-6 sm:px-8 lg:grid-cols-[1fr_1.4fr] lg:items-start lg:gap-20 lg:px-12 lg:py-24 xl:grid-cols-[1fr_2fr]">
+      <div className="mx-auto grid w-full max-w-[94rem] grid-cols-1 items-center gap-12 px-4 pt-8 pb-6 sm:px-8 lg:grid-cols-[1fr_1.4fr] lg:items-start lg:gap-20 lg:px-12 lg:py-24 xl:grid-cols-[1fr_1.55fr] xl:px-16 2xl:grid-cols-[1fr_2fr] 2xl:px-12">
         {/* Left: logo + content */}
         <div className="flex flex-col items-center lg:-mt-6 lg:items-start">
           {/* The logo PNG has ~5% transparent padding on its left, so at the
