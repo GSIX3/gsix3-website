@@ -64,6 +64,10 @@ const technologyLogos: Logo[] = [
       "Raspberry Pi",
     ),
   },
+  {
+    name: "Dotnet",
+    mark: carouselLogo(assetPath("technologies", "dotnet.png"), "dotnet"),
+  },
 ];
 
 const customerLogos: Logo[] = [
