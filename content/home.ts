@@ -1,8 +1,8 @@
 export const homeContent = {
   hero: {
-    headline: "Enterprise software engineering built for scale.",
+    headline: "Built to Invent. Engineered to Simplify",
     subtext:
-      "GSIX3 partners with enterprises and growth-stage startups to architect, build, and ship production-grade web platforms, AI systems, data infrastructure, and cloud solutions.",
+      "We create custom software, intelligent automation, and innovative technology that simplify complexity and power business growth.",
     cta: "Book a free consultation",
   },
   services: {

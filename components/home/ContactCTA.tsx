@@ -1,30 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import { site } from "@/content/site";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 
-const SERVICE_ID =
-  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "YOUR_SERVICE_ID";
-const TEMPLATE_ID =
-  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "YOUR_TEMPLATE_ID";
-const PUBLIC_KEY =
-  process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "YOUR_PUBLIC_KEY";
-
-const PLACEHOLDER_VALUES = new Set([
-  "YOUR_SERVICE_ID",
-  "YOUR_TEMPLATE_ID",
-  "YOUR_PUBLIC_KEY",
-]);
-
-function isEmailJsConfigured() {
-  return (
-    !PLACEHOLDER_VALUES.has(SERVICE_ID) &&
-    !PLACEHOLDER_VALUES.has(TEMPLATE_ID) &&
-    !PLACEHOLDER_VALUES.has(PUBLIC_KEY)
-  );
-}
+// Base URL of the FastAPI email service (set NEXT_PUBLIC_EMAIL_API in .env.local).
+const EMAIL_API = process.env.NEXT_PUBLIC_EMAIL_API ?? "http://localhost:8000";
 
 export default function ContactCTA({ compact = false }: { compact?: boolean }) {
   const [submitted, setSubmitted] = useState(false);
@@ -42,33 +23,34 @@ export default function ContactCTA({ compact = false }: { compact?: boolean }) {
     const name = (formData.get("name") as string).trim();
     const email = (formData.get("email") as string).trim();
     const message = (formData.get("message") as string).trim();
+    // Hidden honeypot — real users leave it empty; bots tend to fill it.
+    const honeypot = ((formData.get("company") as string) ?? "").trim();
 
     if (!name || !email || !message) {
       setValidationError("Please fill in all fields.");
       return;
     }
 
-    if (!isEmailJsConfigured()) {
-      setError(
-        "Email service is not configured yet. Add your EmailJS credentials to .env.local and restart the dev server.",
-      );
-      return;
-    }
-
     setIsSending(true);
 
     try {
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        { name, email, message },
-        { publicKey: PUBLIC_KEY },
-      );
+      // The backend (CONTACT_TO) already delivers to the company inbox and sends
+      // the visitor a confirmation, so a single request is all that's needed.
+      const res = await fetch(`${EMAIL_API}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, honeypot }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status}`);
+      }
+
       setSubmitted(true);
     } catch (err) {
-      console.error("EmailJS send failed:", err);
+      console.error("Contact send failed:", err);
       setError(
-        "Something went wrong. Please try again or email us directly at gsix0003@gmail.com",
+        `Something went wrong. Please try again or email us directly at ${site.email}`,
       );
     } finally {
       setIsSending(false);
@@ -115,6 +97,15 @@ export default function ContactCTA({ compact = false }: { compact?: boolean }) {
                 onSubmit={handleSubmit}
                 className="space-y-4 rounded-2xl border border-border bg-bg p-8"
               >
+                {/* Honeypot: hidden from users; bot submissions are silently dropped. */}
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 <div>
                   <label htmlFor="name" className="mb-1.5 block text-sm text-text-muted">
                     Name

@@ -1,4 +1,4 @@
-import { Inter, Jost, Space_Grotesk } from "next/font/google";
+import { Inter, Jost, Sora } from "next/font/google";
 import Footer from "@/components/layout/Footer";
 import GrainOverlay from "@/components/layout/GrainOverlay";
 import Navbar from "@/components/layout/Navbar";
@@ -12,8 +12,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+// Sora — geometric, precise sans for headings. Reads premium/engineered, a more
+// professional fit for the brand than the quirkier Space Grotesk it replaces.
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   display: "swap",
 });
@@ -44,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jost.variable} h-full bg-white text-zinc-900`}
+      className={`${inter.variable} ${sora.variable} ${jost.variable} h-full bg-white text-zinc-900`}
       suppressHydrationWarning
     >
       <head>

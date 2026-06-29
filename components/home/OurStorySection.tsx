@@ -1,12 +1,16 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import ScrollUnderline from "@/components/motion/ScrollUnderline";
 import { site } from "@/content/site";
 
 const officePhotoSrc = "/assets/office.jpeg";
 
 export default function OurStorySection() {
   return (
-    <section id="about" className="border-y border-border py-24 md:py-32">
+    <section
+      id="about"
+      className="relative z-10 -mt-[70svh] rounded-t-[2.25rem] border-b border-border bg-bg-elevated pb-24 pt-12 shadow-[0_-22px_55px_-30px_rgba(20,20,43,0.3)] md:rounded-t-[3.25rem] md:pb-32 md:pt-16"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-16">
@@ -25,13 +29,13 @@ export default function OurStorySection() {
 
             <div className="order-1 space-y-16 md:space-y-20 lg:order-2">
               <div>
-                <h2 className="font-heading text-4xl font-semibold tracking-tight text-text md:text-5xl lg:text-[3.25rem]">
-                  Our Story
-                </h2>
-                <p className="mt-4 text-lg font-medium text-accent md:text-xl">
-                  Three Engineers. One Vision.
-                </p>
-                <p className="mt-6 text-justify text-base leading-relaxed text-text md:text-lg">
+                <div className="inline-block">
+                  <h2 className="font-heading text-4xl font-semibold tracking-tight text-text md:text-5xl lg:text-[3.25rem]">
+                    Our Story
+                  </h2>
+                  <ScrollUnderline className="mt-5 w-full" />
+                </div>
+                <p className="mt-8 text-justify text-base leading-relaxed text-text md:text-lg">
                   Founded in {site.established} in Sri Lanka, {site.name} was
                   built by three engineers across Mechatronics, Software and
                   Computer Engineering, who believed the future of software was

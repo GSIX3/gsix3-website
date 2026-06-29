@@ -106,8 +106,8 @@ export default function Navbar() {
               id="site-header-logo-img"
               src={`/logo.png?v=${site.logoVersion}`}
               alt={site.name}
-              width={120}
-              height={40}
+              width={2261}
+              height={625}
               className="h-9 w-auto md:h-10"
               priority
               unoptimized

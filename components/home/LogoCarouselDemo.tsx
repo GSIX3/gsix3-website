@@ -17,13 +17,21 @@ function assetPath(folder: string, file: string) {
   return `/assets/${folder}/${encodeURIComponent(file)}`;
 }
 
-function carouselLogo(src: string, name: string) {
+// width/height must match each image's real aspect ratio, otherwise next/image
+// warns "width or height modified, but not the other". The logos are square
+// (2295×2295) by default; pass real dims for any that aren't (e.g. JGP1 is 4:1).
+function carouselLogo(
+  src: string,
+  name: string,
+  width = 2295,
+  height = 2295,
+) {
   return (
     <Image
       src={src}
       alt={name}
-      width={280}
-      height={112}
+      width={width}
+      height={height}
       className="h-14 w-auto max-w-full object-contain sm:h-24 sm:max-w-[220px] md:h-28 md:max-w-[260px]"
       unoptimized
     />
@@ -87,7 +95,12 @@ const customerLogos: Logo[] = [
   },
   {
     name: "JGP Marketing",
-    mark: carouselLogo(assetPath("customers", "JGP1.png"), "JGP Marketing"),
+    mark: carouselLogo(
+      assetPath("customers", "JGP1.png"),
+      "JGP Marketing",
+      2772,
+      693,
+    ),
   },
   {
     name: "GSIX",

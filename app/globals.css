@@ -16,7 +16,7 @@
   --color-muted-foreground: #6b7280;
   --color-secondary-foreground: #374151;
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
+  --font-heading: var(--font-sora);
   --animate-marquee: marquee var(--duration) linear infinite;
   --animate-marquee-reverse: marquee-reverse var(--duration) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
