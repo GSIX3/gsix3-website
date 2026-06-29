@@ -35,7 +35,7 @@ function buildOpenGraphImage(imageUrl: string, alt: string) {
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${site.name} — Web, AI & Cloud Engineering`,
+    default: `${site.name} — GSIX3 — Innovation with Power. Engineered with Quality.`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -54,13 +54,13 @@ export const defaultMetadata: Metadata = {
     locale: "en_US",
     url: baseUrl,
     siteName: site.name,
-    title: `${site.name} — Web, AI & Cloud Engineering`,
+    title: `${site.name} — GSIX3 — Innovation with Power. Engineered with Quality.`,
     description: site.description,
     images: buildOpenGraphImage(defaultOgImage, site.name),
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Web, AI & Cloud Engineering`,
+    title: `${site.name} — GSIX3 — Innovation with Power. Engineered with Quality.`,
     description: site.description,
     images: [defaultOgImage],
   },
@@ -75,12 +75,12 @@ export function homeMetadata(): Metadata {
     alternates: { canonical: baseUrl },
     openGraph: {
       url: baseUrl,
-      title: `${site.name} — Web, AI & Cloud Engineering`,
+      title: `${site.name} — GSIX3 — Innovation with Power. Engineered with Quality.`,
       description: site.description,
       images: buildOpenGraphImage(defaultOgImage, site.name),
     },
     twitter: {
-      title: `${site.name} — Web, AI & Cloud Engineering`,
+      title: `${site.name} — GSIX3 — Innovation with Power. Engineered with Quality.`,
       description: site.description,
       images: [defaultOgImage],
     },

@@ -8,10 +8,14 @@ export const dynamic = "force-static";
 
 export const metadata = pageMetadata(
   "About",
-  `Learn about ${site.name} — a computer engineering company focused on web, AI, data, cloud, and mobile solutions.`,
+  `Learn about ${site.name} — an engineering company focused on web, AI, data, cloud, mobile and  automation solutions.`,
   {
     path: "/about",
-    keywords: ["about GSIX3", "engineering company", "software development team"],
+    keywords: [
+      "about GSIX3",
+      "engineering company",
+      "software & automation development team",
+    ],
   },
 );
 
