@@ -14,7 +14,7 @@ export default function AnimatedTestimonialsDemo() {
       description:
         "A digital cheque management solution that eliminates manual cheque writing. It helps organizations generate, track, and manage cheques efficiently while reducing errors and saving valuable time.",
       src: "/assets/product-showcase/cloud-ops.png",
-      customers: ["Jansiri Motor Stores"],
+      customers: ["Janasiri Motor Stores"],
     },
     {
       title: "Multi-Location Attendance System & Mobile App",

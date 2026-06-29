@@ -11,9 +11,7 @@ const footerLinks = [
   { label: "Services", href: "/#services" },
   { label: "Websites", href: "/pricing" },
   { label: "Products", href: "/#portfolio" },
-  { label: "FAQs", href: "#" },
   { label: "About", href: "/#about" },
-  { label: "Careers", href: "#" },
 ];
 
 const policies = [
@@ -24,31 +22,35 @@ const policies = [
 
 const socials = [
   {
-    label: "X",
-    href: "#",
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1Fo6j5tSxR/?mibextid=wwXIfr",
+    hoverColor: "group-hover:text-blue-700",
     icon: (
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.16 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
     ),
   },
   {
     label: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/company/gsix3/",
+    hoverColor: "group-hover:text-blue-600",
     icon: (
       <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
     ),
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/gsix.3?igsh=bWNoOGRpdmRsMGly",
+    hoverColor: "group-hover:text-pink-500",
     icon: (
       <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 3.68a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z" />
     ),
   },
   {
-    label: "YouTube",
-    href: "#",
+    label: "TikTok",
+    href: "https://vt.tiktok.com/ZSCyLupd9/",
+    hoverColor: "group-hover:text-[#fe2c55]",
     icon: (
-      <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2C0 8.07 0 12 0 12s0 3.93.5 5.8a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14c.5-1.87.5-5.8.5-5.8s0-3.93-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
     ),
   },
 ];
@@ -65,12 +67,12 @@ export default function Footer() {
   return (
     <footer
       className={cn(
-        "relative overflow-hidden",
+        "relative",
         isLight ? "bg-white text-text" : "bg-slate-950 text-white",
       )}
     >
       {!isLight && (
-        <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <ShootingStars
             starColor="#7dd3fc"
             trailColor="#38bdf8"
@@ -92,7 +94,9 @@ export default function Footer() {
           <div className="flex-1">
             <p className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
               {site.name}
-              <span className={isLight ? "text-accent" : "text-teal-300"}>.</span>
+              <span className={isLight ? "text-accent" : "text-teal-300"}>
+                .
+              </span>
             </p>
             <p
               className={cn(
@@ -137,7 +141,9 @@ export default function Footer() {
               href="/contact"
               className={cn(
                 "mt-3 inline-block font-heading text-5xl font-medium leading-none tracking-tight transition-colors md:text-6xl",
-                isLight ? "text-accent hover:text-accent-bright" : "hover:text-teal-300",
+                isLight
+                  ? "text-accent hover:text-accent-bright"
+                  : "hover:text-teal-300",
               )}
             >
               Let&apos;s talk
@@ -175,22 +181,49 @@ export default function Footer() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end">
             {socials.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className={cn(
-                  "flex h-9 w-9 items-center justify-center rounded-full border transition-colors",
-                  isLight
-                    ? "border-border text-text-muted hover:border-accent hover:text-accent"
-                    : "border-white/25 text-white/80 hover:border-white hover:bg-white/10 hover:text-white",
-                )}
+                className="group relative mx-1 flex transform cursor-pointer flex-col items-center justify-center transition-transform duration-300 ease-in-out hover:scale-110"
               >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-                  {social.icon}
-                </svg>
+                <div
+                  className={cn(
+                    "absolute -top-16 z-10 hidden whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-medium shadow-lg transition-all duration-300 ease-out group-hover:block",
+                    isLight
+                      ? "bg-white text-black"
+                      : "bg-black text-white",
+                  )}
+                >
+                  {social.label}
+                  <span
+                    className={cn(
+                      "absolute bottom-[-6px] left-1/2 h-3 w-3 -translate-x-1/2 rotate-45",
+                      isLight ? "bg-white" : "bg-black",
+                    )}
+                  />
+                </div>
+                <span
+                  className={cn(
+                    "flex h-12 w-12 items-center justify-center rounded-full shadow-xl transition-all duration-300 ease-out md:h-14 md:w-14",
+                    isLight ? "bg-white text-black" : "bg-black text-white",
+                  )}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                    className={cn(
+                      "h-6 w-6 transition-colors duration-300 md:h-7 md:w-7",
+                      isLight ? "text-black" : "text-white",
+                      social.hoverColor,
+                    )}
+                  >
+                    {social.icon}
+                  </svg>
+                </span>
               </a>
             ))}
           </div>
