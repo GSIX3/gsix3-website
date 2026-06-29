@@ -41,7 +41,7 @@ export function AnimatedTestimonials({
   }, [testimonials.length]);
 
   return (
-    <section className="relative overflow-hidden bg-slate-950 py-16 sm:py-20 md:py-28">
+    <section id="portfolio" className="relative overflow-hidden bg-slate-950 py-16 sm:py-20 md:py-28">
       <div className="pointer-events-none absolute inset-0 z-0">
         <ShootingStars
           starColor="#7dd3fc"

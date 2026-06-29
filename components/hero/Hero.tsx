@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { homeContent } from "@/content/home";
@@ -287,20 +288,27 @@ export default function Hero() {
           ? "h-16 w-auto"
           : "h-24 w-auto lg:h-28 2xl:h-36"
       }
-      // Anchor: visible until the morph logo is measured and takes over, so
-      // there's no flash; it keeps layout for measurement either way.
       style={{ visibility: reducedMotion || !ready ? "visible" : "hidden" }}
-      aria-hidden={!reducedMotion}
     >
-      <Image
-        src={`/logo.png?v=${site.logoVersion}`}
-        alt={site.name}
-        width={2261}
-        height={625}
-        className="h-full w-auto"
-        priority
-        unoptimized
-      />
+      <Link
+        href="/"
+        className="inline-block h-full"
+        aria-label={`${site.name} home`}
+        onClick={(event) => {
+          event.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
+        <Image
+          src={`/logo.png?v=${site.logoVersion}`}
+          alt={site.name}
+          width={2261}
+          height={625}
+          className="h-full w-auto"
+          priority
+          unoptimized
+        />
+      </Link>
     </div>
   );
 

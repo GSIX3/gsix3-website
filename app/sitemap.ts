@@ -3,7 +3,7 @@ import { portfolioProjects } from "@/content/portfolio";
 import { site } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/services", "/portfolio", "/about", "/contact"];
+  const routes = ["",  "/about", "/services", "/pricing", "/portfolio", "/contact"];
   const portfolioRoutes = portfolioProjects.map(
     (project) => `/portfolio/${project.slug}`,
   );

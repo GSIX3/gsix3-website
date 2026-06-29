@@ -9,6 +9,7 @@ import { useHydratedReducedMotion } from "@/hooks/useHydratedReducedMotion";
 import { site } from "@/content/site";
 import Button from "@/components/ui/Button";
 import { EASE } from "@/lib/motion";
+import { scrollToSectionId, handleSectionNavClick } from "@/lib/utils";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -20,6 +21,7 @@ export default function Navbar() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const isHome = pathname === "/";
+  const showNavLogo = !isHome || scrolled || open;
 
   useEffect(() => {
     // On the home page the hero is pinned while the logo travels into the
@@ -40,6 +42,19 @@ export default function Navbar() {
 
   useEffect(() => {
     setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+
+    const timeouts = [0, 50, 150, 350, 700, 1200, 2000].map((delay) =>
+      window.setTimeout(() => scrollToSectionId(hash, "auto"), delay),
+    );
+
+    return () => timeouts.forEach(clearTimeout);
   }, [pathname]);
 
   useEffect(() => {
@@ -75,13 +90,17 @@ export default function Navbar() {
           <Link
             href="/"
             className={`relative z-[60] flex shrink-0 items-center transition-opacity duration-200 ${
-              isHome && !open
-                ? "pointer-events-none opacity-0"
-                : "opacity-100"
+              showNavLogo ? "opacity-100" : "pointer-events-none opacity-0"
             }`}
-            onClick={() => setOpen(false)}
-            aria-hidden={isHome && !open}
-            tabIndex={isHome && !open ? -1 : undefined}
+            onClick={(event) => {
+              setOpen(false);
+              if (isHome) {
+                event.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            aria-hidden={!showNavLogo}
+            tabIndex={showNavLogo ? undefined : -1}
           >
             <Image
               id="site-header-logo-img"
@@ -100,6 +119,7 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={(event) => handleSectionNavClick(event, item.href, pathname)}
                 className={`group relative text-[14px] font-medium tracking-tight transition-colors duration-200 ${
                   isActive(item.href)
                     ? "text-text"
@@ -190,7 +210,11 @@ export default function Navbar() {
                   >
                     <Link
                       href={item.href}
-                      onClick={() => setOpen(false)}
+                      onClick={(event) =>
+                        handleSectionNavClick(event, item.href, pathname, () =>
+                          setOpen(false),
+                        )
+                      }
                       className={`group flex items-center justify-between border-b border-border/70 py-5 transition-colors ${
                         isActive(item.href) ? "text-accent" : "text-text"
                       }`}
