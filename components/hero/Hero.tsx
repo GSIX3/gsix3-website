@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
-import Button from "@/components/ui/Button";
+import { Button as MovingBorderButton } from "@/components/ui/moving-border";
 import { EncryptedText } from "@/components/ui/encrypted-text";
 import HeroSlideshow, { type HeroSlide } from "@/components/home/HeroSlideshow";
 
@@ -286,11 +286,26 @@ export default function Hero() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-      className="flex w-full max-w-xl flex-col items-center text-center lg:mt-8 lg:items-start lg:text-left"
+      className="flex w-full max-w-xl flex-wrap items-center justify-center gap-3 lg:mt-8 lg:justify-start"
     >
-      <div>
-        <Button href="/contact">{hero.cta}</Button>
-      </div>
+      <MovingBorderButton
+        as={Link}
+        href="/contact"
+        duration={3000}
+        borderClassName="bg-[radial-gradient(#9b5fd4_40%,transparent_60%)]"
+        className="px-3 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
+      >
+        Book a consultation
+      </MovingBorderButton>
+      <MovingBorderButton
+        as={Link}
+        href="/#portfolio"
+        duration={3600}
+        borderClassName="bg-[radial-gradient(#ed40b3_40%,transparent_60%)]"
+        className="px-3 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
+      >
+        See our products
+      </MovingBorderButton>
     </motion.div>
   );
 
@@ -334,7 +349,7 @@ export default function Hero() {
     <div className="relative flex min-h-svh w-full items-center bg-white">
       <div className="mx-auto grid w-full max-w-[94rem] grid-cols-1 items-center gap-12 px-4 pt-8 pb-6 sm:px-8 lg:grid-cols-[1fr_1.4fr] lg:items-start lg:gap-20 lg:px-12 lg:py-24 xl:grid-cols-[1fr_1.55fr] xl:px-16 2xl:grid-cols-[1fr_2fr] 2xl:px-12">
         {/* Left: logo + content */}
-        <div className="flex flex-col items-center lg:-mt-6 lg:items-start">
+        <div className="flex flex-col items-center lg:-mt-6 lg:items-start xl:translate-x-20 2xl:translate-x-0">
           {/* The logo PNG has ~5% transparent padding on its left, so at the
               large 2xl size its visible icon sits indented from the heading's
               left edge. Pull it back by that amount on big screens only. */}
@@ -344,8 +359,8 @@ export default function Hero() {
           {/* Inline product visual — phones/tablets only; centered between copy and
               CTA. Width is capped by the leftover viewport height so the whole hero
               (logo → copy → image → CTA) fits in one screen and the pin never clips. */}
-          <div className="my-4 w-full max-w-xl lg:hidden">
-            <div className="relative mx-auto aspect-[7/5] w-[min(100%,calc((100svh_-_30rem)*1.4))] overflow-hidden rounded-[2rem] shadow-xl shadow-slate-900/10 ring-1 ring-black/5">
+          <div className="my-8 w-full max-w-xl lg:hidden">
+            <div className="relative mx-auto aspect-[7/5] w-[min(78%,calc((100svh_-_32rem)*1.4))] overflow-hidden rounded-[2rem] shadow-xl shadow-slate-900/10 ring-1 ring-black/5">
               <HeroSlideshow slides={heroSlides} interval={5000} />
             </div>
           </div>
@@ -353,9 +368,11 @@ export default function Hero() {
           {ctaGroup}
         </div>
 
-        {/* Right: gradient visual panel (desktop only) */}
-        <div className="relative hidden w-full lg:mt-10 lg:block lg:translate-x-8">
-          <div className="relative mx-auto aspect-[4/3] w-full overflow-hidden rounded-[2rem] shadow-xl shadow-slate-900/10 ring-1 ring-black/5 lg:aspect-[7/5] lg:w-[min(100%,calc((100svh_-_15rem)*1.4))]">
+        {/* Right: gradient visual panel (desktop only). Right-aligned within its
+            column on laptop so its right edge mirrors the left content's left edge
+            (symmetric side margins); 2xl keeps the original centered + nudged look. */}
+        <div className="relative hidden w-full lg:mt-10 lg:flex lg:justify-end 2xl:translate-x-8 2xl:justify-center">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] shadow-xl shadow-slate-900/10 ring-1 ring-black/5 lg:aspect-[7/5] lg:w-[min(100%,calc((100svh_-_15rem)*1.4))]">
             <HeroSlideshow slides={heroSlides} interval={5000} />
           </div>
         </div>

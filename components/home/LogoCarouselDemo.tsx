@@ -112,7 +112,7 @@ function HeadingBlock({ customers }: { customers: boolean }) {
   return (
     <div className="max-w-[22rem] space-y-1 text-center sm:max-w-3xl md:max-w-5xl">
       <GradientHeading variant="secondary" size="lg">
-        {customers ? "Our customers" : "We use the best and"}
+        {customers ? "Customers" : "We use the best and"}
       </GradientHeading>
       <GradientHeading size="hero">
         {customers ? "Who " : "latest "}
