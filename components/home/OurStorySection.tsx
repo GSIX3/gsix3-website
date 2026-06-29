@@ -9,7 +9,7 @@ export default function OurStorySection() {
   return (
     <section
       id="about"
-      className="relative z-10 -mt-[70svh] rounded-t-[2.25rem] border-b border-border bg-bg-elevated pb-24 pt-12 shadow-[0_-22px_55px_-30px_rgba(20,20,43,0.3)] md:rounded-t-[3.25rem] md:pb-32 md:pt-16"
+      className="story-slide-over relative z-10 -mt-6 rounded-t-[2.25rem] border-b border-border bg-bg-elevated pb-24 pt-12 shadow-[0_-22px_55px_-30px_rgba(20,20,43,0.3)] md:-mt-10 md:rounded-t-[3.25rem] md:pb-32 md:pt-16"
     >
       <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal>
