@@ -217,3 +217,53 @@ section[id] {
     animation: none;
   }
 }
+
+/* ── Page preloader ───────────────────────────────────────────────────────── */
+@keyframes loader-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+@keyframes loader-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-loader-sweep {
+  animation: loader-sweep 1.15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-loader-rise {
+  animation: loader-rise 0.6s ease-out both;
+}
+
+/* The "Our Story" section slides up over the pinned hero. This is purely a
+   motion flourish, so it only applies when the user allows motion. (Unlayered
+   so it reliably overrides the Tailwind -mt utilities used as the static
+   fallback for reduced motion.) */
+@media (prefers-reduced-motion: no-preference) {
+  .story-slide-over {
+    margin-top: -70svh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-loader-sweep {
+    width: 100%;
+    transform: none;
+    animation: none;
+  }
+  .animate-loader-rise {
+    animation: none;
+  }
+}

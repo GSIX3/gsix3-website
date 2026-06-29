@@ -2,6 +2,7 @@ import { Inter, Jost, Sora } from "next/font/google";
 import Footer from "@/components/layout/Footer";
 import GrainOverlay from "@/components/layout/GrainOverlay";
 import Navbar from "@/components/layout/Navbar";
+import PageLoader from "@/components/layout/PageLoader";
 import { site } from "@/content/site";
 import { defaultMetadata } from "@/lib/metadata";
 import "./globals.css";
@@ -61,6 +62,7 @@ export default function RootLayout({
         className="min-h-full bg-white text-zinc-900 antialiased"
         suppressHydrationWarning
       >
+        <PageLoader />
         <GrainOverlay />
         <Navbar />
         <main className="flex-1">{children}</main>
