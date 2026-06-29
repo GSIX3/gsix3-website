@@ -90,7 +90,7 @@ function GridItem({ area, number, title, description }: GridItemProps) {
 
 export default function GlowingEffectDemo() {
   return (
-    <section className="relative overflow-hidden bg-white py-16 md:py-24">
+    <section id="services" className="relative overflow-hidden bg-white py-16 md:py-24">
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute -top-40 left-1/2 h-[34rem] w-[48rem] -translate-x-1/2 rounded-full bg-purple-200/60 blur-3xl" />
         <div className="absolute top-1/3 -left-28 h-80 w-80 rounded-full bg-sky-100/80 blur-3xl" />

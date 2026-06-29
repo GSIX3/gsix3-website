@@ -8,9 +8,9 @@ export const site = {
   established: "2025",
   logoVersion: "2",
   nav: [
-    { label: "Services", href: "/services" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    { label: "About", href: "/#about" },
+    { label: "Services", href: "/#services" },
+    { label: "Websites", href: "/pricing" },
+    { label: "Products", href: "/#portfolio" },
   ],
 } as const;

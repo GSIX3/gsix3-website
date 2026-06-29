@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { homeContent } from "@/content/home";
@@ -69,9 +70,13 @@ export default function Hero() {
   const isMobile = useIsMobileHero();
   const reducedMotion = usePrefersReducedMotion();
 
-  const headlineLines = isMobile
-    ? ["Enterprise software", "engineering", "built for scale."]
-    : ["Enterprise software", "engineering built", "for scale."];
+  // Split into segments so "Invent" and "Simplify" can be highlighted (dark
+  // purple + underline) while keeping the per-character reveal animation.
+  const headlineLines: { text: string; highlight?: boolean }[][] = [
+    [{ text: "Built to " }, { text: "Invent", highlight: true }, { text: "." }],
+    [{ text: "Engineered to" }],
+    [{ text: "Simplify", highlight: true }, { text: "." }],
+  ];
   const lineRevealDelayMs = isMobile ? 68 : 54;
   const lineStartDelayMs = isMobile ? 720 : 980;
 
@@ -241,17 +246,31 @@ export default function Hero() {
       <h1 className="font-heading text-[clamp(2rem,8vw,2.75rem)] font-semibold leading-[1.12] tracking-tight text-slate-950 md:text-[clamp(2.25rem,3.6vw,3.5rem)]">
         <span className="sr-only">{hero.headline}</span>
         <span aria-hidden="true">
-          {headlineLines.map((line, index) => (
-            <span className="block whitespace-nowrap" key={line}>
-              <EncryptedText
-                text={line}
-                encryptedClassName="text-purple-300/60"
-                revealedClassName="text-slate-950"
-                revealDelayMs={lineRevealDelayMs}
-                startDelayMs={index * lineStartDelayMs}
-              />
-            </span>
-          ))}
+          {headlineLines.map((segments, lineIndex) => {
+            let charsBefore = 0;
+            return (
+              <span className="block whitespace-nowrap" key={lineIndex}>
+                {segments.map((seg, segIndex) => {
+                  const startDelayMs =
+                    lineIndex * lineStartDelayMs +
+                    charsBefore * lineRevealDelayMs;
+                  charsBefore += seg.text.length;
+                  return (
+                    <EncryptedText
+                      key={segIndex}
+                      text={seg.text}
+                      encryptedClassName="text-purple-300/60"
+                      revealedClassName={
+                        seg.highlight ? "text-accent" : "text-slate-950"
+                      }
+                      revealDelayMs={lineRevealDelayMs}
+                      startDelayMs={startDelayMs}
+                    />
+                  );
+                })}
+              </span>
+            );
+          })}
         </span>
       </h1>
 
@@ -287,20 +306,27 @@ export default function Hero() {
           ? "h-16 w-auto"
           : "h-24 w-auto lg:h-28 2xl:h-36"
       }
-      // Anchor: visible until the morph logo is measured and takes over, so
-      // there's no flash; it keeps layout for measurement either way.
       style={{ visibility: reducedMotion || !ready ? "visible" : "hidden" }}
-      aria-hidden={!reducedMotion}
     >
-      <Image
-        src={`/logo.png?v=${site.logoVersion}`}
-        alt={site.name}
-        width={2261}
-        height={625}
-        className="h-full w-auto"
-        priority
-        unoptimized
-      />
+      <Link
+        href="/"
+        className="inline-block h-full"
+        aria-label={`${site.name} home`}
+        onClick={(event) => {
+          event.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
+        <Image
+          src={`/logo.png?v=${site.logoVersion}`}
+          alt={site.name}
+          width={2261}
+          height={625}
+          className="h-full w-auto"
+          priority
+          unoptimized
+        />
+      </Link>
     </div>
   );
 
@@ -309,7 +335,10 @@ export default function Hero() {
       <div className="mx-auto grid w-full max-w-[94rem] grid-cols-1 items-center gap-12 px-4 pt-8 pb-6 sm:px-8 lg:grid-cols-[1fr_1.4fr] lg:items-start lg:gap-20 lg:px-12 lg:py-24 xl:grid-cols-[1fr_2fr]">
         {/* Left: logo + content */}
         <div className="flex flex-col items-center lg:-mt-6 lg:items-start">
-          <div className="mb-7 md:mb-9">{lampLogo}</div>
+          {/* The logo PNG has ~5% transparent padding on its left, so at the
+              large 2xl size its visible icon sits indented from the heading's
+              left edge. Pull it back by that amount on big screens only. */}
+          <div className="mb-10 md:mb-12 2xl:-ml-6 2xl:mb-16">{lampLogo}</div>
           {heroContent}
 
           {/* Inline product visual — phones/tablets only; centered between copy and
