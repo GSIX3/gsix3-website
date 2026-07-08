@@ -16,6 +16,13 @@ export default function HeroSlideshow({
   const reducedMotion = useHydratedReducedMotion();
   const [active, setActive] = useState(0);
 
+  // Start on a random slide each visit so the first image isn't always the same.
+  // Runs only on the client after hydration to avoid a server/client mismatch.
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    setActive(Math.floor(Math.random() * slides.length));
+  }, [slides.length]);
+
   useEffect(() => {
     if (slides.length <= 1) return;
     const id = window.setInterval(() => {
