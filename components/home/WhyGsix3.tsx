@@ -12,7 +12,7 @@ const reasons = [
   {
     title: "Built to last, not just to launch",
     description:
-      "We engineer for scale, security, and maintainability from the first commit — not after your first incident.",
+      "We engineer for scale, security, and maintainability from the first commit - not after your first incident.",
   },
   {
     title: "Intelligent automation, not just integration",

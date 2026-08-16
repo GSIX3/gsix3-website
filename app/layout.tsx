@@ -51,7 +51,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="color-scheme" content="light" />
         <script
           type="application/ld+json"

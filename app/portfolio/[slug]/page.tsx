@@ -1,10 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Button from "@/components/ui/Button";
-import {
-  getPortfolioProject,
-  portfolioProjects,
-} from "@/content/portfolio";
+import { getPortfolioProject, portfolioProjects } from "@/content/portfolio";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-static";
@@ -26,7 +23,7 @@ export async function generateMetadata({ params }: PageProps) {
     path: `/portfolio/${slug}`,
     keywords: project.tags,
     ogImage: project.coverImage,
-    ogImageAlt: `${project.client} — ${project.title}`,
+    ogImageAlt: `${project.client} - ${project.title}`,
   });
 }
 
@@ -45,7 +42,11 @@ export default async function PortfolioCaseStudyPage({ params }: PageProps) {
           src={project.coverImage}
           alt={project.client}
           fill
-          className={coverFit === "contain" ? "object-contain bg-zinc-950 p-4" : "object-cover"}
+          className={
+            coverFit === "contain"
+              ? "object-contain bg-zinc-950 p-4"
+              : "object-cover"
+          }
           priority
           unoptimized
         />
@@ -125,7 +126,11 @@ export default async function PortfolioCaseStudyPage({ params }: PageProps) {
               src={project.coverImage}
               alt={`${project.client} platform`}
               fill
-              className={coverFit === "contain" ? "object-contain bg-zinc-950 p-4" : "object-cover"}
+              className={
+                coverFit === "contain"
+                  ? "object-contain bg-zinc-950 p-4"
+                  : "object-cover"
+              }
               unoptimized
             />
           </div>
