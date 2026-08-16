@@ -3,6 +3,8 @@ import { site } from "@/content/site";
 
 const baseUrl = site.url;
 const defaultOgImage = `/logo.png?v=${site.logoVersion}`;
+const faviconSvg = `/gsix3_logo.svg?v=${site.logoVersion}`;
+const faviconPng = `/gsix3_logo_1.png?v=${site.logoVersion}`;
 
 const defaultKeywords = [
   "automation engineering",
@@ -37,8 +39,15 @@ function buildOpenGraphImage(imageUrl: string, alt: string) {
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${site.name} — Innovation with Power. Engineered with Quality.`,
+    default: site.name,
     template: `%s | ${site.name}`,
+  },
+  icons: {
+    icon: [
+      { url: faviconPng, type: "image/png", sizes: "32x32" },
+      { url: faviconSvg, type: "image/svg+xml" },
+    ],
+    apple: faviconPng,
   },
   description: site.description,
   keywords: defaultKeywords,
@@ -74,6 +83,7 @@ export const defaultMetadata: Metadata = {
 
 export function homeMetadata(): Metadata {
   return {
+    title: site.name,
     alternates: { canonical: baseUrl },
     openGraph: {
       url: baseUrl,

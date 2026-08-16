@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 
 export const metadata = pageMetadata(
   "Services",
-  "Web applications, AI, data science, database, cloud, and mobile development — GSIX3 engineering services.",
+  "Web applications, AI, data science, database, cloud and mobile development - GSIX3 engineering services.",
   {
     path: "/services",
     keywords: [
@@ -28,7 +28,7 @@ export default function ServicesPage() {
       <Section
         eyebrow="Services"
         title="Engineering services built for scale"
-        description="From web and mobile apps to AI, data science, databases, and cloud — we cover the full technology stack."
+        description="From web and mobile apps to AI, data science, databases, and cloud - we cover the full technology stack."
       />
       <div className="mx-auto max-w-6xl px-6 pb-24">
         <div className="grid gap-8 lg:grid-cols-3">

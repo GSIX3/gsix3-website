@@ -85,11 +85,11 @@ export const services: Service[] = [
     titleLine2: "Applications",
     headline: "Apps built for millions",
     description:
-      "From MVPs to full-scale platforms, we build mobile apps that are intuitive, powerful, and ready for millions.",
+      "From MVPs to full-scale platforms, we build mobile apps that are intuitive, powerful and ready for millions.",
     points: [
       "iOS and Android native and cross-platform builds",
       "MVPs through production-ready releases",
-      "Offline support, push notifications, and analytics",
+      "Offline support, push notifications and analytics",
     ],
     tags: ["iOS", "Android", "React Native", "Flutter"],
   },
