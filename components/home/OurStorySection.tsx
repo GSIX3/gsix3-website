@@ -1,9 +1,9 @@
-import Image from "next/image";
+import LottiePlayer from "@/components/motion/LottiePlayer";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import ScrollUnderline from "@/components/motion/ScrollUnderline";
 import { site } from "@/content/site";
 
-const officePhotoSrc = "/assets/office.jpeg";
+const teamAnimationSrc = "/assets/lottie/about-us-team-purple.json";
 
 export default function OurStorySection() {
   return (
@@ -13,16 +13,13 @@ export default function OurStorySection() {
     >
       <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal>
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+          <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-14 xl:grid-cols-[1.3fr_1fr] xl:gap-16">
             <div className="order-2 mr-auto w-full max-w-md sm:max-w-lg lg:sticky lg:top-28 lg:order-1 lg:-ml-6 lg:max-w-none lg:self-start xl:-ml-8 max-lg:mx-auto max-lg:ml-0">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-bg-elevated lg:aspect-[6/6]">
-                <Image
-                  src={officePhotoSrc}
-                  alt="GSIX3 office"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 512px, 560px"
-                  unoptimized
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-bg-elevated">
+                <LottiePlayer
+                  src={teamAnimationSrc}
+                  ariaLabel="GSIX3 team at work"
+                  className="absolute inset-0 lg:-inset-x-[8%]"
                 />
               </div>
             </div>

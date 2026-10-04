@@ -11,6 +11,7 @@
   "dependencies": {
     "@radix-ui/react-avatar": "^1.2.0",
     "clsx": "^2.1.1",
+    "lottie-web": "^5.13.0",
     "lucide-react": "^1.21.0",
     "motion": "^12.40.0",
     "next": "16.2.9",
